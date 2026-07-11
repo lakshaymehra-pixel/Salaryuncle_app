@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "827840194283",
+    "project_id": "suryaloan-e961a",
+    "storage_bucket": "suryaloan-e961a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827840194283:android:97061d18b72b19a8fd00ae",
+        "android_client_info": {
+          "package_name": "com.salarytopup.salarytopup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLD5an8c4gFwWSzCIinT79XLqLyCLFSt0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827840194283:android:97061d18b72b19a8fd00af",
+        "android_client_info": {
+          "package_name": "com.salaryuncle.salaryuncle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLD5an8c4gFwWSzCIinT79XLqLyCLFSt0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

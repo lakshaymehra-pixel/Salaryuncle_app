@@ -1,0 +1,38 @@
+[
+  {
+    "doc_type": "aadhaar_front",
+    "event_name": "aadhaar_upload",
+    "name": "Aadhaar - Front",
+    "allowed_format": "image"
+  },
+  {
+    "doc_type": "aadhaar_back",
+    "event_name": "aadhaar_upload",
+    "name": "Aadhaar - Back",
+    "allowed_format": "image"
+  },
+  {
+    "event_name": "pan_upload",
+    "name": "PAN",
+    "doc_type": "pan_upload",
+    "allowed_format": "image"
+  },
+  {
+    "event_name": "pay_slip_upload",
+    "name": "Salary slip",
+    "doc_type": "pay_slip_upload",
+    "allowed_format": "image"
+  },
+  {
+    "event_name": "bank_statement_upload",
+    "name": "Bank Statement",
+    "doc_type": "bank_statement_upload",
+    "allowed_format": "document"
+  },
+  {
+    "event_name": "residence_proof_upload",
+    "doc_type": "electricity_bill",
+    "name": "Utility Bill",
+    "allowed_format": "document"
+  }
+]

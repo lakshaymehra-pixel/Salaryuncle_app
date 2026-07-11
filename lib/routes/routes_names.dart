@@ -1,0 +1,30 @@
+class RoutesName {
+  static const SplashScreen = "/splash";
+  static const LoginScreen = "/authScreen";
+  static const OTPScreen = "/otpScreen";
+  static const RegisterScreen = "/register";
+  static const PreviewScreen = "/preview";
+  static const LoanSelect = '/loan';
+  static const OccupationScreen = '/occupation';
+  static const PanScreen = '/pan';
+  static const AadhaarScreen = '/aadhaar';
+  static const ScoreScreen = '/score';
+  static const BankScreen = '/bank';
+  static const DocScreen = '/doc';
+  static const OnbroadingPage = '/onbroading';
+  static const PersonalDetailsScreen = '/personalDetails';
+  static const ResidenceDetailsScreen = '/residenceDetails';
+  static const EmploymentDetailsScreen = '/employmentDetails';
+  static const IncomeDetailsScreen = '/incomeDetails';
+  static const ThankyouScreen = '/thankYou';
+  static const DashbroadScreen = '/dashbroad';
+  static const DashDetailScreen = '/dashdetail';
+  static const LoanStatusScreen = '/loanstatus';
+  static const RepayHisScreen = '/repayHis';
+  static const CongratesPage = '/congrates';
+  static const TermsAndConditionsPage = '/TermsAndConditionsPage';
+  static const PrivacyPolicyPage = '/PrivacyPolicyScreen';
+  static const PaymentFailedPage = '/PaymentFailedPage';
+  static const PaymentSuccessPage = '/PaymentSuccessPage';
+  static const EligiblityFaliedPage = '/EligiblityFaliedPage';
+}

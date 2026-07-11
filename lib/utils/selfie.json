@@ -1,0 +1,7 @@
+[
+  {
+    "event_name": "selfie_upload",
+    "name": "Upload Your Image",
+    "allowed_format": "image"
+  }
+]

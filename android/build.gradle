@@ -1,0 +1,67 @@
+ buildscript {
+    ext.kotlin_version = '2.1.20'
+
+    repositories {
+        google()
+        mavenCentral()
+        jcenter() //here
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.9.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.3.13'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
+
+    }
+}
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+// Fix for old plugins (e.g. lean_file_picker) that don't declare a
+// `namespace`, which newer Android Gradle Plugin versions require.
+// Registered BEFORE evaluationDependsOn so it runs while subprojects are
+// still being evaluated.
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty("android")) {
+            def androidExt = project.extensions.findByName("android")
+            if (androidExt != null) {
+                // Inject a namespace for old plugins that don't declare one.
+                if (androidExt.namespace == null) {
+                    def manifestFile = project.file("src/main/AndroidManifest.xml")
+                    if (manifestFile.exists()) {
+                        def pkg = new XmlSlurper().parse(manifestFile).@package.text()
+                        if (pkg != null && !pkg.isEmpty()) {
+                            androidExt.namespace = pkg
+                        }
+                    }
+                }
+                // Force old plugins (e.g. lean_file_picker) to compile against a
+                // modern SDK so attributes like android:attr/lStar resolve.
+                androidExt.compileSdkVersion 36
+            }
+        }
+    }
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
+configurations.all {
+    resolutionStrategy {
+        force 'androidx.core:core-ktx:1.7.0'
+    }
+}
