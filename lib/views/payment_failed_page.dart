@@ -13,7 +13,7 @@ class PaymentFailedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomBackground(heightOfUpperBox: 0, children: [
-      SizedBox(height: 40.sp),
+      SizedBox(height: 53),
       Container(
         padding: EdgeInsets.all(14.sp),
         decoration: BoxDecoration(
@@ -22,8 +22,8 @@ class PaymentFailedPage extends StatelessWidget {
           boxShadow: ColorConstants.softShadow,
         ),
         child: Container(
-        height: 70.sp,
-        width: 70.sp,
+        height: 150,
+        width: 150,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: ColorConstants.danger.withOpacity(0.12),
@@ -33,8 +33,8 @@ class PaymentFailedPage extends StatelessWidget {
             backgroundLoading: true,
             frameRate: const FrameRate(60),
             fit: BoxFit.fitHeight,
-            height: 45.sp,
-            width: 45.sp,
+            height: 67,
+            width: 67,
             repeat: false,
             'https://lottie.host/ad47f861-8db9-47f9-8882-8ceb8d62ace6/mqm2KrgzXq.json'),
       ),
@@ -55,7 +55,7 @@ class PaymentFailedPage extends StatelessWidget {
           color: ColorConstants.muted,
         ),
       ),
-      SizedBox(height: 40.sp),
+      SizedBox(height: 53),
       CustomButton(
         height: Get.height * 0.06,
         onPressed: () {
@@ -68,8 +68,8 @@ class PaymentFailedPage extends StatelessWidget {
 }
 
 // Container(
-//   height: 100.sp,
-//   width: 50.sp,
+//   height: 180,
+//   width: 83,
 //   child: Lottie.network(
 //     onLoaded: (a) {
 //       print(a.seconds);

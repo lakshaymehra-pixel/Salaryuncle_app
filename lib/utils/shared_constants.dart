@@ -88,22 +88,22 @@ class SharedConstants {
   static const UTM_SOURCE = "utm_source";
 
   //General Constant
- static const Company_Address = "Office No-101, First Floor,NN Mall, Mangalam Palace,Sector-3, Rohini Delhi-110085";
- static const Company_Name = "Baid Stock Broking Services Private Limited";
+ static const Company_Address = "AG-52, Shalimar Bagh, Delhi-110088";
+ static const Company_Name = "Julania Finance Private Limited";
  static const Brand_Name = "SalaryUncle";
  static const ARD_Package_Name = "com.salaryuncle.salaryuncle";
  static const IOS_App_Id = "";
- static const instagram = "https://www.instagram.com/salarytopup/";
- static const facebook = "https://www.facebook.com/people/salarytopup/";
- static const twitter = "https://x.com/salarytopup";
- static const youtube = "https://www.youtube.com/@salarytopup";
- static const gmaps = 'https://www.google.com/maps/place/NN+Mall/@28.6997176,77.1143893,18z/data=!3m1!5s0x390d03e30a35f7ad:0x81e6780ea7f99861!4m10!1m2!2m1!1sOffice+No-101,+First+Floor,NN+Mall,+Mangalam+Palace,Sector-3,+Rohini+Delhi-110085!3m6!1s0x390d03e30bfaaaab:0x9bf53f2531cf07f4!8m2!3d28.7014315!4d77.1165606!15sClFPZmZpY2UgTm8tMTAxLCBGaXJzdCBGbG9vcixOTiBNYWxsLCBNYW5nYWxhbSBQYWxhY2UsU2VjdG9yLTMsIFJvaGluaSBEZWxoaS0xMTAwODVaUCJOb2ZmaWNlIG5vIDEwMSBmaXJzdCBmbG9vciBubiBtYWxsIG1hbmdhbGFtIHBhbGFjZSBzZWN0b3IgMyByb2hpbmkgZGVsaGkgMTEwMDg1kgEPYnVzaW5lc3NfY2VudGVymgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVU5YY2pkUVRITm5SUkFCqgHLARABKlIiTm9mZmljZSBubyAxMDEgZmlyc3QgZmxvb3Igbm4gbWFsbCBtYW5nYWxhbSBwYWxhY2Ugc2VjdG9yIDMgcm9oaW5pIGRlbGhpIDExMDA4NSgAMh8QASIb3N3nebw29J8Nr-yHtxxARiMnHx_fHocipwQIMlIQAiJOb2ZmaWNlIG5vIDEwMSBmaXJzdCBmbG9vciBubiBtYWxsIG1hbmdhbGFtIHBhbGFjZSBzZWN0b3IgMyByb2hpbmkgZGVsaGkgMTEwMDg14AEA-gEECAAQIg!16s%2Fg%2F11hbv9xvzf?entry=ttu&g_ep=EgoyMDI1MDUwNi4wIKXMDSoASAFQAw%3D%3D';
+ static const instagram = "https://www.instagram.com/salaryuncle/";
+ static const facebook = "https://www.facebook.com/SalaryUncle";
+ static const twitter = "https://x.com/salaryuncle";
+ static const youtube = "https://salaryuncle.com";
+ static const gmaps = 'https://www.google.com/maps/search/?api=1&query=AG-52%2C%20Shalimar%20Bagh%2C%20Delhi%20110088';
  static const razorpayKey ="rzp_live_L7iGFEiE6MGnlN";
- static const Company_Number ="+919643336036";
- static const Company_WaNumber ="+919643336036";
- static const Company_Email ="info@salarytopup.com";
- static const Company_Website ="https://salarytopup.com";
- static const Privacy_Policy_Url ="https://salarytopup.com/privacypolicy";
- static const Terms_Condition_Url ="https://salarytopup.com/termsandconditions";
+ static const Company_Number ="+917042561004";
+ static const Company_WaNumber ="+917428966114";
+ static const Company_Email ="Customercare@salaryuncle.com";
+ static const Company_Website ="https://salaryuncle.com";
+ static const Privacy_Policy_Url ="https://salaryuncle.com/privacy-policy";
+ static const Terms_Condition_Url ="https://salaryuncle.com/terms-and-conditions";
 
 }

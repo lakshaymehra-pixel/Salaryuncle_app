@@ -53,13 +53,18 @@ class DashDeatailPage extends GetView<DashDetailController> {
                                         ),
                                       ),
                                       SizedBox(height: 8.sp),
-                                      Text(
-                                        '₹ ${controller.leadData.value.data![0].loanAmount ?? "NO DATA"}',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 26.sp,
-                                          fontWeight: FontWeight.w800,
-                                          letterSpacing: -0.5,
+                                      FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          '₹ ${controller.leadData.value.data![0].loanAmount ?? "NO DATA"}',
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 22.sp,
+                                            fontWeight: FontWeight.w800,
+                                            letterSpacing: -0.5,
+                                          ),
                                         ),
                                       ),
                                       SizedBox(height: 14.sp),
@@ -228,8 +233,8 @@ class DashDeatailPage extends GetView<DashDetailController> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            width: Get.width * 0.4,
+          Flexible(
+            flex: 5,
             child: Text(
               label,
               style: TextStyle(
@@ -239,6 +244,7 @@ class DashDeatailPage extends GetView<DashDetailController> {
               ),
             ),
           ),
+          SizedBox(width: 10.sp),
           isStatus
               ? Container(
                   padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 6.sp),

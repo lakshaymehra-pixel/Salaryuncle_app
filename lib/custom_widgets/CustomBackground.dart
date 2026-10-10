@@ -49,6 +49,16 @@ class CustomBackground extends StatelessWidget {
 
   DashbroadController controller = Get.put(DashbroadController());
 
+  /// Flow screens are often opened with offAll(), leaving nothing to pop.
+  /// Fall back to the dashboard so the header arrow is never a dead button.
+  void _goBack() {
+    if (Get.key.currentState?.canPop() ?? false) {
+      Get.back();
+    } else {
+      Get.offAllNamed(RoutesName.DashbroadScreen);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var widgetOptions = <Widget>[customBackground(), AllLeadsPage(), LoanStatusScreen(), SupportPage()].obs;
@@ -57,7 +67,7 @@ class CustomBackground extends StatelessWidget {
         backdrop: Column(
           children: [
             Container(
-                height: 57.sp,
+                height: 90,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   gradient: ColorConstants.brandGradient,
@@ -106,7 +116,7 @@ class CustomBackground extends StatelessWidget {
                     leading: backEnabled
                         ? IconButton(
                             icon: const Icon(Icons.arrow_back_rounded, color: Colors.white),
-                            onPressed: () => Get.back(),
+                            onPressed: _goBack,
                           )
                         : null,
                     title: const Text('Loan Application',
@@ -173,15 +183,18 @@ class CustomBackground extends StatelessWidget {
     } catch (e) {
       print(e);
     }
-    return Container(
+    // Fill the body instead of a fixed fraction of the screen height, so the
+    // content is never cut off and the last field stays reachable.
+    return SafeArea(
+      child: Padding(
         padding: EdgeInsets.all(12.sp),
-        // color: Colors.black,
-        height: GetPlatform.isIOS ? Get.height * 0.78 : Get.height * 0.8,
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: children,
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

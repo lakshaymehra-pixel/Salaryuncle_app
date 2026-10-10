@@ -38,6 +38,12 @@ void main() async {
       statusBarColor: Colors.grey.withOpacity(0.5),
     ),
   );
+  // Hide the Android navigation bar; it reappears on a swipe from the edge
+  // and hides itself again, so it never sits on top of the app's own UI.
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.immersiveSticky,
+    overlays: [SystemUiOverlay.top],
+  );
   prefs = await SharedPreferences.getInstance();
 
   // try {
@@ -60,8 +66,38 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  /// Android drops immersive mode whenever the app is resumed (or returns from
+  /// a payment WebView), so re-apply it instead of letting the nav bar stick.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      SystemChrome.setEnabledSystemUIMode(
+        SystemUiMode.immersiveSticky,
+        overlays: [SystemUiOverlay.top],
+      );
+    }
+    super.didChangeAppLifecycleState(state);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,11 +117,11 @@ class MyApp extends StatelessWidget {
           theme: ColorConstants.themeLight,
           darkTheme: ColorConstants.themeDark,
           title: '${SharedConstants.Brand_Name}',
-          // Bump all text ~18% bigger app-wide (fixes small responsive_sizer .sp fonts),
-          // and cap the user's system font scale so layouts don't overflow.
+          // Cap the user's system font scale so large-font accessibility
+          // settings can't overflow the fixed-height cards in this UI.
           builder: (context, child) {
             final mq = MediaQuery.of(context);
-            final scale = mq.textScaler.scale(1.0).clamp(1.0, 1.2) * 1.18;
+            final scale = mq.textScaler.scale(1.0).clamp(1.0, 1.1);
             return MediaQuery(
               data: mq.copyWith(textScaler: TextScaler.linear(scale)),
               child: child ?? const SizedBox.shrink(),
@@ -160,7 +196,7 @@ String? extractParameter(String referrer, String key) {
 // Future setupAppFlyer() async {
 //   Map<String, Object> appsFlyerOptions = {
 //     "afDevKey": "fupfvH2AJ3JwqVvW9z2747",
-//     "afAppId": Platform.isIOS ? "6503283983" : "com.suryaloan.suryaloan",
+//     "afAppId": Platform.isIOS ? "6503283983" : "com.salaryuncle.salaryuncle",
 //   };
 //   debugPrint("onAppOpenAttribution data: ");
 //
@@ -243,7 +279,7 @@ checkVersion(BuildContext context) async {
                     onPressed: () {
                       Uri storeLink = Uri.parse('');
                       if (GetPlatform.isIOS) {
-                        storeLink = Uri.parse('https://apps.apple.com/in/app/suryaloan/id${SharedConstants.IOS_App_Id}');
+                        storeLink = Uri.parse('https://apps.apple.com/in/app/salaryuncle/id${SharedConstants.IOS_App_Id}');
                       } else {
                         storeLink =
                             Uri.parse('https://play.google.com/store/apps/details?id=${SharedConstants.ARD_Package_Name}');

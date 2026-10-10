@@ -53,14 +53,14 @@ class SuFormCard extends StatelessWidget {
                 children: [
                   if (icon != null) ...[
                     Container(
-                      height: 34.sp,
-                      width: 34.sp,
+                      height: 44,
+                      width: 44,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: ColorConstants.cardTintLight,
                         borderRadius: BorderRadius.circular(11.sp),
                       ),
-                      child: Icon(icon, color: ColorConstants.primary, size: 18.sp),
+                      child: Icon(icon, color: ColorConstants.primary, size: 21),
                     ),
                     SizedBox(width: 12.sp),
                   ],

@@ -20,9 +20,11 @@ class RepaymentHistoryController extends GetxController {
     try {
       loading.value = true;
       collection.clear();
-      var list =
-          jsonDecode(prefs.getString(SharedConstants.REPAYMENT_HISTORY) ?? "[]")
-              as List;
+      // The cached value can be the literal "null" when the API sent no
+      // history, so decode defensively instead of casting straight to List.
+      final decoded =
+          jsonDecode(prefs.getString(SharedConstants.REPAYMENT_HISTORY) ?? "[]");
+      final list = decoded is List ? decoded : const [];
 
       for (var element in list) {
         collection.add(RepaymentModel.fromJson(element));

@@ -51,17 +51,17 @@ class LoanStatusScreen extends GetView<StatusController> {
                                   height: Get.height * 0.2,
                                   child: Center(
                                     child: SizedBox(
-                                      height: 50.sp,
-                                      width: 50.sp,
+                                      height: 140,
+                                      width: 140,
                                       child: SizedBox(
                                         child: Stack(
                                           children: [
                                             Center(
                                               child: SizedBox(
-                                                width: 200.sp,
-                                                height: 200.sp,
+                                                width: 140,
+                                                height: 140,
                                                 child: CircularProgressIndicator(
-                                                  strokeWidth: 12.sp,
+                                                  strokeWidth: 10,
                                                   valueColor: AlwaysStoppedAnimation(Theme.of(context).primaryColor),
                                                   backgroundColor: ColorConstants.border,
                                                   strokeCap: StrokeCap.round,
@@ -438,7 +438,7 @@ class LoanStatusScreen extends GetView<StatusController> {
                   if (Events.getCurrentEvent() > 7)
                     SizedBox(
                       width: Get.width,
-                      height: 37.sp,
+                      height: 45,
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 10.sp),
                         child: Center(

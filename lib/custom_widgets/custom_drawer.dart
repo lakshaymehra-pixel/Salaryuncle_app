@@ -21,6 +21,7 @@ import '../utils/events.dart';
 import '../utils/shared_constants.dart';
 import '../views/dev_page.dart';
 import '../views/privacy_policy_page.dart';
+import '../views/repay_page.dart';
 import 'custom_profile_pic_view.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -53,7 +54,7 @@ class CustomDrawer extends StatelessWidget {
                       children: [
                         Flexible(
                           child: SizedBox(
-                            width: 55.sp,
+                            width: 120,
                             child: Text(
                               textAlign: TextAlign.start,
                               (prefs.getString(SharedConstants.NAME) ?? 'hi user')
@@ -66,7 +67,7 @@ class CustomDrawer extends StatelessWidget {
                         ),
                         SizedBox(height: 11.sp),
                         SizedBox(
-                          width: 55.sp,
+                          width: 120,
                           child: Text(
                             textAlign: TextAlign.start,
                             '+91 ${(prefs.getString(SharedConstants.MOBILE) ?? '').substring(0, 5)} ${(prefs.getString(SharedConstants.MOBILE) ?? '').substring(5, 10)}',
@@ -174,8 +175,10 @@ class CustomDrawer extends StatelessWidget {
                       icon: Icons.account_balance_rounded,
                       text: 'Repay Loan',
                       onTap: () {
-                        launchUrl(Uri.parse("https://salarytopup.com/repay-loan"),mode: LaunchMode.inAppWebView);
-                        // Get.to(const RepayPage());
+                        controller.advancedDrawerController.value.hideDrawer();
+                        // In-app WebView (not launchUrl) so the user keeps a
+                        // back button and a way home.
+                        Get.to(() => const RepayPage());
                         controller.selectedDrawerIndex.value = 4;
 
                         // Handle Settings tap

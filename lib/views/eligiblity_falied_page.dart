@@ -40,7 +40,7 @@ class EligiblityFaliedPage extends StatelessWidget {
               child: Icon(
                 Icons.error_rounded,
                 color: ColorConstants.danger,
-                size: 44.sp,
+                size: 48,
               ),
             ),
           ),
@@ -80,7 +80,7 @@ class EligiblityFaliedPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 40.sp),
+          SizedBox(height: 53),
           // Text(
           //     "Click on the button below to go to \n\n dashboard \n\n"
           //     "to get more details",
@@ -99,8 +99,8 @@ class EligiblityFaliedPage extends StatelessWidget {
 }
 
 // Container(
-//   height: 100.sp,
-//   width: 50.sp,
+//   height: 180,
+//   width: 83,
 //   child: Lottie.network(
 //     onLoaded: (a) {
 //       print(a.seconds);

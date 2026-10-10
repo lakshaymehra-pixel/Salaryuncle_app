@@ -18,7 +18,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             Text(
-              '${SharedConstants.Company_Name} ("we," "our," "us") operates the https://www.suryaloan.com website (the "Service"). This Privacy Policy explains how we collect, use, and share your personal information when you use our Service.',
+              '${SharedConstants.Company_Name} ("we," "our," "us") operates the ${SharedConstants.Company_Website} website (the "Service"). This Privacy Policy explains how we collect, use, and share your personal information when you use our Service.',
               style: TextStyle(fontSize: 16, color: Theme.of(context).textTheme.titleMedium!.color),
             ),
             const SizedBox(height: 20),

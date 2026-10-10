@@ -109,7 +109,7 @@ class CustomInputField extends StatelessWidget {
                         child: Icon(
                           Icons.edit,
                           color: Color(ColorConstants.primaryColor),
-                          size: 18.sp,
+                          size: 21,
                         ))
                     : Container(),
               ],
@@ -212,7 +212,7 @@ class CustomInputField extends StatelessWidget {
                           onPressed: onPressed,
                           icon: Icon(
                             Icons.calendar_month_rounded,
-                            size: 23.sp,
+                            size: 24,
                             color: Theme.of(context).textTheme.titleMedium!.color,
                           )
                           // Container(

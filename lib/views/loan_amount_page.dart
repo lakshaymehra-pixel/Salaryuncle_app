@@ -35,21 +35,15 @@ class LoanAmountPage extends GetView<LoanCalculatorController> {
     // print("total value = ${controller.maxValue.value}");
     return Obx(() {
       return CustomBackground(
-          isScrollable: false,
           doubleBackToCloseApp: false,
-          height: (Get.arguments ?? false) ? Get.height * 0.8 : Get.height * 1,
           heightOfUpperBox: Get.height * 0.7,
           children: [
-            SizedBox(
-              height: Get.height * 0.02,
-            ),
+            SizedBox(height: 10.sp),
             CustomHeadingText(
               text2: "Please fill in your loan information",
               text1: "LOAN CALCULATOR",
             ),
-            SizedBox(
-              height: Get.height * 0.02,
-            ),
+            SizedBox(height: 14.sp),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.sp),
               child: Container(
@@ -69,14 +63,18 @@ class LoanAmountPage extends GetView<LoanCalculatorController> {
                 ),
                 child: Column(
                   children: [
-                    Text(
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
                       "₹${((controller.currentLoanAmount.value) * 1000).round()}",
+                      maxLines: 1,
                       style: TextStyle(
-                        fontSize: 40.sp,
+                        fontSize: 32.sp,
                         fontWeight: FontWeight.w800,
                         color: ColorConstants.greenDeep,
                         letterSpacing: -0.5,
                       ),
+                    ),
                     ),
                     SizedBox(height: 6.sp),
                     Text(
@@ -93,38 +91,36 @@ class LoanAmountPage extends GetView<LoanCalculatorController> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        _SuMiniStat(
+                        Expanded(child: _SuMiniStat(
                           title: "Tenure",
                           value:
                               "${(controller.currentTenure.value).toInt()} days",
-                        ),
+                        )),
                         Container(
                             width: 1,
                             height: 30.sp,
                             color: const Color(0xFFEDF3F0)),
-                        _SuMiniStat(
+                        Expanded(child: _SuMiniStat(
                           title: "Total Payable",
                           value:
                               "₹${((controller.totalValue.value.value * 100).round()) * 10}",
-                        ),
+                        )),
                         Container(
                             width: 1,
                             height: 30.sp,
                             color: const Color(0xFFEDF3F0)),
-                        _SuMiniStat(
+                        Expanded(child: _SuMiniStat(
                           title: "Interest / day",
                           value:
                               "₹${((controller.currentLoanAmount.value) * 10).round()}",
-                        ),
+                        )),
                       ],
                     ),
                   ],
                 ),
               ),
             ),
-            SizedBox(
-              height: Get.height * 0.02,
-            ),
+            SizedBox(height: 14.sp),
             if (!(Get.arguments ?? false))
               CustomDDHeading(
                 textHeading: "Loan Purpose",
@@ -140,9 +136,7 @@ class LoanAmountPage extends GetView<LoanCalculatorController> {
                       print("purposeValue ==> ${controller.purposeValue.value.name}");
                     }),
               ),
-            SizedBox(
-              height: Get.height * 0.01,
-            ),
+            SizedBox(height: 8.sp),
             if (controller.purposeValue.value.name == "OTHERS")
               CustomInputField(
                 height: Get.height * 0.095,
@@ -164,7 +158,7 @@ class LoanAmountPage extends GetView<LoanCalculatorController> {
               child: Row(
                 children: [
                   Icon(Icons.currency_rupee_rounded,
-                      color: ColorConstants.primary, size: 16.sp),
+                      color: ColorConstants.primary, size: 18),
                   SizedBox(width: 6.sp),
                   Text(
                     "Enter total loan amount",
@@ -183,9 +177,7 @@ class LoanAmountPage extends GetView<LoanCalculatorController> {
                 ],
               ),
             ),
-            SizedBox(
-              height: Get.height * 0.01,
-            ),
+            SizedBox(height: 8.sp),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.sp),
               child: SliderWidget(
@@ -208,15 +200,13 @@ class LoanAmountPage extends GetView<LoanCalculatorController> {
                 type: "K",
               ),
             ),
-            SizedBox(
-              height: Get.height * 0.02,
-            ),
+            SizedBox(height: 14.sp),
             Padding(
               padding: EdgeInsets.only(left: 12.sp),
               child: Row(
                 children: [
                   Icon(Icons.calendar_month_rounded,
-                      color: ColorConstants.primary, size: 16.sp),
+                      color: ColorConstants.primary, size: 18),
                   SizedBox(width: 6.sp),
                   Text(
                     "Enter total days",
@@ -235,9 +225,7 @@ class LoanAmountPage extends GetView<LoanCalculatorController> {
                 ],
               ),
             ),
-            SizedBox(
-              height: Get.height * 0.01,
-            ),
+            SizedBox(height: 8.sp),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.sp),
               child: SliderWidget(
@@ -261,9 +249,7 @@ class LoanAmountPage extends GetView<LoanCalculatorController> {
                 type: "D",
               ),
             ),
-            SizedBox(
-              height: Get.height * 0.03,
-            ),
+            SizedBox(height: 20.sp),
             Center(
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 12.sp),
@@ -276,9 +262,9 @@ class LoanAmountPage extends GetView<LoanCalculatorController> {
                 ),
                 child: SimpleCircularProgressBar(
                   animationDuration: 0,
-                  size: 50.sp,
-                  progressStrokeWidth: 12.sp,
-                  backStrokeWidth: 12.sp,
+                  size: 150,
+                  progressStrokeWidth: 10,
+                  backStrokeWidth: 10,
                   maxValue: controller.maxValue.value,
                   valueNotifier: controller.totalValue.value,
                   progressColors: const [ColorConstants.gold],
@@ -287,9 +273,9 @@ class LoanAmountPage extends GetView<LoanCalculatorController> {
                   onGetText: (double value) {
                     return Text(
                       textAlign: TextAlign.center,
-                      'Your Total \nPayable Amount is \n₹${((controller.totalValue.value.value * 100).round()) * 10}',
+                      'Total Payable\n₹${((controller.totalValue.value.value * 100).round()) * 10}',
                       style: TextStyle(
-                          fontSize: 15.sp,
+                          fontSize: 11.sp,
                           fontWeight: FontWeight.bold,
                           color: ColorConstants.greenDeep),
                     );
@@ -297,9 +283,7 @@ class LoanAmountPage extends GetView<LoanCalculatorController> {
                 ),
               ),
             ),
-            SizedBox(
-              height: Get.height * 0.01,
-            ),
+            SizedBox(height: 8.sp),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 12.sp),
               padding: EdgeInsets.all(18.sp),
@@ -368,19 +352,26 @@ class LoanAmountPage extends GetView<LoanCalculatorController> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      Flexible(child: Text(
                         "Total repayment",
                         style: TextStyle(
                             fontSize: 15.5.sp,
                             fontWeight: FontWeight.w800,
-                            color: ColorConstants.greenDeep),
+                            color: ColorConstants.greenDeep)),
                       ),
-                      Text(
-                        "₹${((controller.totalValue.value.value * 100).round()) * 10}",
-                        style: TextStyle(
-                            fontSize: 17.sp,
-                            fontWeight: FontWeight.w800,
-                            color: ColorConstants.greenDeep),
+                      Flexible(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "₹${((controller.totalValue.value.value * 100).round()) * 10}",
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontSize: 17.sp,
+                                fontWeight: FontWeight.w800,
+                                color: ColorConstants.greenDeep),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -395,23 +386,19 @@ class LoanAmountPage extends GetView<LoanCalculatorController> {
                       color: ColorConstants.goldSoft,
                       borderRadius: BorderRadius.circular(10.sp),
                     ),
-                    child: FittedBox(
-                      child: Text(
-                        "10% of principle amount will be deducted as processing fee",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w600,
-                            color: ColorConstants.greenDeep),
-                      ),
+                    child: Text(
+                      "10% of principle amount will be deducted as processing fee",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: ColorConstants.greenDeep),
                     ),
                   )
                 ],
               ),
             ),
-            SizedBox(
-              height: Get.height * 0.03,
-            ),
+            SizedBox(height: 20.sp),
             Get.arguments ?? false
                 ? Container()
                 : Padding(
@@ -624,12 +611,16 @@ class _SuMiniStat extends StatelessWidget {
           ),
         ),
         SizedBox(height: 3.sp),
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 13.5.sp,
-            fontWeight: FontWeight.w800,
-            color: ColorConstants.greenDeep,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            value,
+            maxLines: 1,
+            style: TextStyle(
+              fontSize: 13.5.sp,
+              fontWeight: FontWeight.w800,
+              color: ColorConstants.greenDeep,
+            ),
           ),
         ),
       ],
@@ -649,20 +640,28 @@ class _KfsRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 14.5.sp,
-            fontWeight: FontWeight.w500,
-            color: ColorConstants.muted,
+        Flexible(
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 14.5.sp,
+              fontWeight: FontWeight.w500,
+              color: ColorConstants.muted,
+            ),
           ),
         ),
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 15.sp,
-            fontWeight: FontWeight.w700,
-            color: valueColor ?? ColorConstants.ink,
+        SizedBox(width: 8.sp),
+        Flexible(
+          child: Text(
+            value,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.right,
+            style: TextStyle(
+              fontSize: 15.sp,
+              fontWeight: FontWeight.w700,
+              color: valueColor ?? ColorConstants.ink,
+            ),
           ),
         ),
       ],

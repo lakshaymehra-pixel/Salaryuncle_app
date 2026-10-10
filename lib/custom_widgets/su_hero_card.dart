@@ -51,11 +51,11 @@ class SuHeroCard extends StatelessWidget {
         children: [
           // Decorative soft circle (MoneyView-style depth)
           Positioned(
-            right: -20.sp,
-            top: -28.sp,
+            right: -30,
+            top: -40,
             child: Container(
-              width: 90.sp,
-              height: 90.sp,
+              width: 140,
+              height: 140,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.white.withOpacity(0.06),
@@ -93,13 +93,18 @@ class SuHeroCard extends StatelessWidget {
                                   ),
                                 ),
                               )
-                            : Text(
-                                amount,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 26.sp,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: -0.5,
+                            : FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  amount,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 21.sp,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: -0.5,
+                                  ),
                                 ),
                               ),
                         if (caption != null) ...[
@@ -129,7 +134,7 @@ class SuHeroCard extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             if (actionIcon != null) ...[
-                              Icon(actionIcon, color: ColorConstants.primary, size: 16.sp),
+                              Icon(actionIcon, color: ColorConstants.primary, size: 18),
                               SizedBox(width: 5.sp),
                             ],
                             Text(

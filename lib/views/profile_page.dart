@@ -30,15 +30,15 @@ class ProfilePage extends StatelessWidget {
         bottom: false,
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          padding: EdgeInsets.fromLTRB(18.sp, 10.sp, 18.sp, 110.sp),
+          padding: EdgeInsets.fromLTRB(18.sp, 10.sp, 18.sp, 90),
           child: Column(
             children: [
               // ── Profile head ──
               Column(
                 children: [
                   Container(
-                    height: 82.sp,
-                    width: 82.sp,
+                    height: 100,
+                    width: 100,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       gradient: ColorConstants.loanCardGradient,
@@ -46,7 +46,7 @@ class ProfilePage extends StatelessWidget {
                       border: Border.all(color: ColorConstants.goldText, width: 3),
                       boxShadow: [BoxShadow(color: ColorConstants.greenDeep.withOpacity(0.25), blurRadius: 24, offset: const Offset(0, 8))],
                     ),
-                    child: Icon(Icons.person_rounded, color: ColorConstants.goldText, size: 38.sp),
+                    child: Icon(Icons.person_rounded, color: ColorConstants.goldText, size: 44),
                   ),
                   SizedBox(height: 12.sp),
                   Text(name, style: TextStyle(color: ColorConstants.ink, fontSize: 19.sp, fontWeight: FontWeight.w800)),
@@ -63,7 +63,7 @@ class ProfilePage extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.verified_rounded, color: ColorConstants.success, size: 14.sp),
+                        Icon(Icons.verified_rounded, color: ColorConstants.success, size: 16),
                         SizedBox(width: 5.sp),
                         Text('KYC Verified', style: TextStyle(color: ColorConstants.success, fontSize: 11.sp, fontWeight: FontWeight.w700)),
                       ],
@@ -130,14 +130,14 @@ class ProfilePage extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    height: 38.sp,
-                    width: 38.sp,
+                    height: 48,
+                    width: 48,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: it.danger ? const Color(0xFFFBEAE8) : ColorConstants.greenSoft,
                       borderRadius: BorderRadius.circular(12.sp),
                     ),
-                    child: Icon(it.icon, color: it.danger ? ColorConstants.danger : ColorConstants.greenDeep, size: 18.sp),
+                    child: Icon(it.icon, color: it.danger ? ColorConstants.danger : ColorConstants.greenDeep, size: 21),
                   ),
                   SizedBox(width: 13.sp),
                   Expanded(
@@ -147,7 +147,7 @@ class ProfilePage extends StatelessWidget {
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w600)),
                   ),
-                  Icon(Icons.chevron_right_rounded, color: const Color(0xFFB9C6C0), size: 18.sp),
+                  Icon(Icons.chevron_right_rounded, color: const Color(0xFFB9C6C0), size: 21),
                 ],
               ),
             ),

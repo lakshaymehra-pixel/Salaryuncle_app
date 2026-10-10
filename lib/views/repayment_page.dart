@@ -11,7 +11,9 @@ import 'package:url_launcher/url_launcher.dart';
 import '../controller/homeController.dart';
 import '../controller/internet_connectivity_controller.dart';
 import '../custom_widgets/custom_toast_snack_bar.dart';
+import '../routes/routes_names.dart';
 import '../utils/color_constants.dart';
+import 'repay_page.dart';
 
 class RepaymentPage extends StatelessWidget {
   RepaymentPage({super.key});
@@ -37,7 +39,7 @@ class RepaymentPage extends StatelessWidget {
         bottom: false,
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          padding: EdgeInsets.fromLTRB(16.sp, 8.sp, 16.sp, 110.sp),
+          padding: EdgeInsets.fromLTRB(16.sp, 8.sp, 16.sp, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -49,10 +51,16 @@ class RepaymentPage extends StatelessWidget {
                 child: Row(
                   children: [
                     GestureDetector(
-                      onTap: () => Get.back(),
+                      onTap: () {
+                        if (Get.key.currentState?.canPop() ?? false) {
+                          Get.back();
+                        } else {
+                          Get.offAllNamed(RoutesName.DashbroadScreen);
+                        }
+                      },
                       child: Container(
-                        width: 38.sp,
-                        height: 38.sp,
+                        width: 48,
+                        height: 48,
                         decoration: BoxDecoration(
                           color: ColorConstants.surfaceLight,
                           shape: BoxShape.circle,
@@ -61,7 +69,7 @@ class RepaymentPage extends StatelessWidget {
                         ),
                         child: Icon(
                           Icons.arrow_back_ios_new_rounded,
-                          size: 16.sp,
+                          size: 18,
                           color: ColorConstants.ink,
                         ),
                       ),
@@ -112,15 +120,19 @@ class RepaymentPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 10.sp),
-                    Text(
-                      outAmt,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 40.sp,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white,
-                        letterSpacing: -1,
-                        height: 1.05,
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        outAmt,
+                        maxLines: 1,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 30.sp,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                          letterSpacing: -1,
+                          height: 1.05,
+                        ),
                       ),
                     ),
                     SizedBox(height: 12.sp),
@@ -267,7 +279,7 @@ class RepaymentPage extends StatelessWidget {
                         ShortMessage.toast(title: "No outstanding amount to repay");
                       } else {
                         if (homeController.loadingOnRepay.value == false) {
-                          launchUrl(Uri.parse("https://salarytopup.com/repay-loan"),mode: LaunchMode.inAppWebView);
+                          Get.to(() => const RepayPage());
 
                           // Get.defaultDialog(
                           //   title: "Select Payment Method",
@@ -328,7 +340,7 @@ class RepaymentPage extends StatelessWidget {
                   },
                   child: Container(
                     width: double.infinity,
-                    height: 54.sp,
+                    height: 56,
                     decoration: BoxDecoration(
                       gradient: ColorConstants.goldGradient,
                       borderRadius: BorderRadius.circular(16.sp),
@@ -344,7 +356,7 @@ class RepaymentPage extends StatelessWidget {
                       child: loading
                           ? SpinKitThreeBounce(
                               color: ColorConstants.greenDeep,
-                              size: 20.sp,
+                              size: 23,
                             )
                           : Text(
                               "Pay ₹$outAmt",
@@ -367,7 +379,7 @@ class RepaymentPage extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.lock_rounded,
-                    size: 13.sp,
+                    size: 16,
                     color: ColorConstants.muted,
                   ),
                   SizedBox(width: 6.sp),
@@ -412,13 +424,13 @@ class RepaymentPage extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 40.sp,
-            height: 40.sp,
+            width: 53,
+            height: 53,
             decoration: BoxDecoration(
               color: badgeBg,
               borderRadius: BorderRadius.circular(11.sp),
             ),
-            child: Icon(icon, size: 20.sp, color: iconColor),
+            child: Icon(icon, size: 23, color: iconColor),
           ),
           SizedBox(width: 12.sp),
           Expanded(
@@ -480,15 +492,16 @@ class RepaymentPage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-            width: Get.width * 0.4,
+          Flexible(
+            flex: 5,
             child: Text(
               label,
               style: TextStyle(fontSize: 14.sp, color: ColorConstants.muted, fontWeight: FontWeight.w600),
             ),
           ),
+          SizedBox(width: 10.sp),
           Expanded(
-            // width: Get.width * 0.4,
+            flex: 6,
             child: Text(
               value,
               textAlign: TextAlign.right,

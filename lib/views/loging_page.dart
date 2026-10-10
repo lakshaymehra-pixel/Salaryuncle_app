@@ -74,7 +74,7 @@ class LogingPage extends GetView<LogingController> {
                       style: TextStyle(color: Colors.white.withOpacity(0.78), fontSize: 15, height: 1.5, fontWeight: FontWeight.w500),
                     ),
                   ),
-                  SizedBox(height: 34.sp),
+                  SizedBox(height: 44),
                   // Mobile number label + input
                   Text('Mobile Number',
                       style: TextStyle(color: Colors.white.withOpacity(0.85), fontSize: 14, fontWeight: FontWeight.w700)),
@@ -162,7 +162,7 @@ class LogingPage extends GetView<LogingController> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 40.sp),
+                  SizedBox(height: 53),
                   // RBI / NBFC footer
                   Center(
                     child: Text(

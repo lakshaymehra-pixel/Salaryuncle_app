@@ -197,8 +197,8 @@ class FeedbackPage extends StatelessWidget {
                                             ? ClipRRect(
                                                 borderRadius: BorderRadius.circular(10.sp),
                                                 child: SizedBox(
-                                                    height: 43.sp,
-                                                    width: 80.sp,
+                                                    height: 61,
+                                                    width: 160,
                                                     child: Image.file(
                                                       controller.Doc.value,
                                                       fit: BoxFit.fill,

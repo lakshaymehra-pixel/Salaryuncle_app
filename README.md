@@ -93,4 +93,4 @@ back to the debug key if `key.properties` is missing.
 
 ---
 
-© Baid Stock Broking Services Pvt. Ltd. — RBI‑registered NBFC.
+© Julania Finance Pvt Ltd — RBI‑registered NBFC (Reg. No. B‑14.01650). Website: [salaryuncle.com](https://salaryuncle.com)

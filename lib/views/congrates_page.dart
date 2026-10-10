@@ -45,8 +45,8 @@ class CongratesPage extends StatelessWidget {
                     backgroundLoading: true,
                     frameRate: const FrameRate(60),
                     fit: BoxFit.fitHeight,
-                    height: 60.sp,
-                    width: 85.sp,
+                    height: 200,
+                    width: 220,
                     repeat: true,
                     'https://lottie.host/6044ab24-4828-4892-94bb-5f0e6eed01da/JRmxuAjj9u.json'),
               ],
@@ -77,7 +77,7 @@ class CongratesPage extends StatelessWidget {
                       color: Theme.of(context).textTheme.titleLarge!.color,
                       fontWeight: FontWeight.w600)),
             ),
-            SizedBox(height: 40.sp),
+            SizedBox(height: 53),
             CustomButton(
                 isLoading: controller.loadingOnDashboard.value,
                 onPressed: () {
@@ -99,8 +99,8 @@ class CongratesPage extends StatelessWidget {
 }
 
 // Container(
-//   height: 100.sp,
-//   width: 50.sp,
+//   height: 180,
+//   width: 83,
 //   child: Lottie.network(
 //     onLoaded: (a) {
 //       print(a.seconds);

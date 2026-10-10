@@ -37,8 +37,8 @@ class ShowScorePage extends GetView<ShowScoreController> {
                     ),
                     Center(
                       child: Container(
-                        height: 96.sp,
-                        width: 96.sp,
+                        height: 110,
+                        width: 110,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
@@ -47,7 +47,7 @@ class ShowScorePage extends GetView<ShowScoreController> {
                         child: Icon(
                           Icons.speed_rounded,
                           color: ColorConstants.primary,
-                          size: 52.sp,
+                          size: 48,
                         ),
                       ),
                     ),
@@ -174,7 +174,7 @@ class ShowScorePage extends GetView<ShowScoreController> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.info_rounded, color: ColorConstants.primary, size: 20.sp),
+                          Icon(Icons.info_rounded, color: ColorConstants.primary, size: 23),
                           SizedBox(width: 10.sp),
                           Expanded(
                             child: Text(

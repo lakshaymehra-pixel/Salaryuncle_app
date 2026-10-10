@@ -118,8 +118,8 @@ class HomePage extends StatelessWidget {
           ),
         ),
         Container(
-          height: 42.sp,
-          width: 42.sp,
+          height: 59,
+          width: 59,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: ColorConstants.surfaceLight,
@@ -129,7 +129,7 @@ class HomePage extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Icon(Icons.notifications_none_rounded, color: ColorConstants.greenDeep, size: 20.sp),
+              Icon(Icons.notifications_none_rounded, color: ColorConstants.greenDeep, size: 23),
               Positioned(
                 top: 10.sp,
                 right: 11.sp,
@@ -169,14 +169,14 @@ class HomePage extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            right: -14.sp,
-            top: -18.sp,
+            right: -22,
+            top: -28,
             child: Container(
-              width: 90.sp,
-              height: 90.sp,
+              width: 130,
+              height: 130,
               decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xFF1C6A50).withOpacity(0.5)),
               alignment: Alignment.center,
-              child: Text('₹', style: TextStyle(color: ColorConstants.goldText.withOpacity(0.85), fontSize: 30.sp, fontWeight: FontWeight.w800)),
+              child: Text('₹', style: TextStyle(color: ColorConstants.goldText.withOpacity(0.85), fontSize: 44, fontWeight: FontWeight.w800)),
             ),
           ),
           Column(
@@ -200,10 +200,15 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10.sp),
-              Text(amount,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: Colors.white, fontSize: 32.sp, fontWeight: FontWeight.w800, letterSpacing: -1)),
+              // Scale the amount down to fit rather than truncating it: a value
+              // like ₹100000 must stay readable in full.
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: Text(amount,
+                    maxLines: 1,
+                    style: TextStyle(color: Colors.white, fontSize: 26.sp, fontWeight: FontWeight.w800, letterSpacing: -1)),
+              ),
               SizedBox(height: 14.sp),
               if (completed)
                 Container(
@@ -340,11 +345,11 @@ class HomePage extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              height: 40.sp,
-              width: 40.sp,
+              height: 53,
+              width: 53,
               alignment: Alignment.center,
               decoration: BoxDecoration(color: ColorConstants.gold, shape: BoxShape.circle, boxShadow: [BoxShadow(color: ColorConstants.gold.withOpacity(0.4), blurRadius: 12, offset: const Offset(0, 4))]),
-              child: Icon(Icons.bolt_rounded, color: Colors.white, size: 20.sp),
+              child: Icon(Icons.bolt_rounded, color: Colors.white, size: 23),
             ),
             SizedBox(width: 12.sp),
             Expanded(
@@ -359,7 +364,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(Icons.chevron_right_rounded, color: ColorConstants.gold, size: 22.sp),
+            Icon(Icons.chevron_right_rounded, color: ColorConstants.gold, size: 25),
           ],
         ),
       ),
@@ -402,11 +407,11 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                height: 40.sp,
-                width: 40.sp,
+                height: 53,
+                width: 53,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(color: ColorConstants.greenSoft, shape: BoxShape.circle),
-                child: Icon(icon, color: ColorConstants.greenDeep, size: 20.sp),
+                child: Icon(icon, color: ColorConstants.greenDeep, size: 23),
               ),
               SizedBox(height: 8.sp),
               Text(label, style: TextStyle(color: ColorConstants.ink, fontSize: 11.5.sp, fontWeight: FontWeight.w600)),
@@ -437,8 +442,8 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 40.sp,
-            width: 40.sp,
+            height: 53,
+            width: 53,
             alignment: Alignment.center,
             decoration: BoxDecoration(color: ColorConstants.greenSoft, shape: BoxShape.circle),
             child: Text('💡', style: TextStyle(fontSize: 18.sp)),
@@ -486,11 +491,11 @@ class HomePage extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    height: 42.sp,
-                    width: 42.sp,
+                    height: 59,
+                    width: 59,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(color: ColorConstants.greenSoft, borderRadius: BorderRadius.circular(12.sp)),
-                    child: Icon(Icons.account_balance_wallet_rounded, color: ColorConstants.greenDeep, size: 22.sp),
+                    child: Icon(Icons.account_balance_wallet_rounded, color: ColorConstants.greenDeep, size: 25),
                   ),
                   SizedBox(width: 12.sp),
                   Expanded(

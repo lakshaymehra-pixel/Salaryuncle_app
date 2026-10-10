@@ -12,8 +12,8 @@ class APIConstants {
   }
 
   //End Points
-  static const UATBaseUrlSURF = 'https://salarytopup.in/api/';
-  static const PRODBaseUrlSURF = 'https://salarytopup.in/api/';
+  static const UATBaseUrlSURF = 'https://crm.salaryuncle.com/api/';
+  static const PRODBaseUrlSURF = 'https://crm.salaryuncle.com/api/';
   static const LOGIN = '/saveCustomerProfile';
   static const RESEND = '/saveCustomerProfile';
   static const VERFIYOTP = '/saveCustomerProfile';
@@ -47,7 +47,7 @@ class APIConstants {
     } else if (GetPlatform.isIOS && isDev == false) {
       return '${PRODBaseUrlSURF}${iosPrefix}/$uri'; //production for ios
     } else {
-      return 'https://api.suryaloan.in/'; //production
+      return 'https://crm.salaryuncle.com/api/'; //production
     }
   }
 

@@ -47,8 +47,8 @@ class EKYCSuccessPage extends StatelessWidget {
                       backgroundLoading: true,
                       frameRate: const FrameRate(60),
                       fit: BoxFit.fitHeight,
-                      height: 55.sp,
-                      width: 55.sp,
+                      height: 130,
+                      width: 130,
                       repeat: false,
                       'https://lottie.host/07f22094-2144-4c1f-8fd7-e878afb7ac41/mg3s1WtVZR.json'),
                 ),
@@ -86,8 +86,8 @@ class EKYCSuccessPage extends StatelessWidget {
 }
 
 // Container(
-//   height: 100.sp,
-//   width: 50.sp,
+//   height: 180,
+//   width: 83,
 //   child: Lottie.network(
 //     onLoaded: (a) {
 //       print(a.seconds);

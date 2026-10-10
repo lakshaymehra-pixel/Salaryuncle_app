@@ -166,7 +166,9 @@ class HomeController extends GetxController {
               var list = result['Data']['collection_history'];
               debugPrint("REPAYMENT HISTORY ==>$list");
 
-              prefs.setString(SharedConstants.REPAYMENT_HISTORY, jsonEncode(list));
+              // Store an empty list rather than "null" so the history screen
+              // can tell "no payments yet" from a decode failure.
+              prefs.setString(SharedConstants.REPAYMENT_HISTORY, jsonEncode(list is List ? list : const []));
             } catch (e) {
               if (APIConstants.isModeDevelopment()) debugPrint("ERROR ON Repayment History$e");
             }

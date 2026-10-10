@@ -45,7 +45,7 @@ class ReportPage extends GetView<ShowScoreController> {
         ),
       )
       ..loadRequest(
-          Uri.parse('https://suryaloan.in/viewCustomerCibilPDF/${prefs.getString(SharedConstants.CIBIL_ID)}'));
+          Uri.parse('https://salaryuncle.com/viewCustomerCibilPDF/${prefs.getString(SharedConstants.CIBIL_ID)}'));
 
     return Obx(() {
       return Scaffold(
@@ -56,7 +56,7 @@ class ReportPage extends GetView<ShowScoreController> {
         body: controller.loading.value
             ? Center(
                 child: SpinKitFadingCircle(
-                size: 30.sp,
+                size: 44,
                 color: ColorConstants.primary,
               ))
             : WebViewWidget(controller: webViewController),

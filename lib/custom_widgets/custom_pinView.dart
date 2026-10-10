@@ -50,14 +50,12 @@ class CustomPinView extends StatelessWidget {
             children: [
               Container(
                 padding: EdgeInsets.only(left: 12.sp),
-                child: FittedBox(
-                  child: Text(
-                    "Please enter the OTP",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16.sp,
-                        color: ColorConstants.ink),
-                  ),
+                child: Text(
+                  "Please enter the OTP",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15.sp,
+                      color: ColorConstants.ink),
                 ),
               ),
               const Text(
@@ -193,18 +191,18 @@ class CustomPinView extends StatelessWidget {
                 controller: countdown_controller,
                 seconds: 60,
                 build: (BuildContext context, double time) => SizedBox(
-                    height: 40.sp,
-                    width: 40.sp,
+                    height: 56,
+                    width: 56,
                     child: SizedBox(
-                      height: 200.0.sp,
+                      height: 56,
                       child: Stack(
                         children: [
                           Center(
                             child: SizedBox(
-                              width: 200.sp,
-                              height: 200.sp,
+                              width: 56,
+                              height: 56,
                               child: CircularProgressIndicator(
-                                strokeWidth: 11.sp,
+                                strokeWidth: 4,
                                 valueColor: const AlwaysStoppedAnimation(
                                   ColorConstants.primary,
                                 ),
@@ -216,7 +214,7 @@ class CustomPinView extends StatelessWidget {
                           ),
                           Center(
                               child: Container(
-                            width: 35.sp,
+                            width: 52,
                             alignment: Alignment.center,
                             child: isResend == false
                                 ? Text(

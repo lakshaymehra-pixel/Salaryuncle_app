@@ -89,12 +89,12 @@ class OccupationPage extends GetView<OccupationController> {
                         ? Icon(
                             Icons.check_circle,
                             color: ColorConstants.primary,
-                            size: 20.sp,
+                            size: 23,
                           )
                         : Icon(
                             Icons.circle_outlined,
                             color: ColorConstants.muted,
-                            size: 20.sp,
+                            size: 23,
                           ),
                     title: Text(
                       "SALARIED",
@@ -130,14 +130,14 @@ class OccupationPage extends GetView<OccupationController> {
                     },
                     leading: controller.selected.value == 1
                         ? Icon(
-                            size: 20.sp,
+                            size: 23,
                             Icons.check_circle,
                             color: ColorConstants.primary,
                           )
                         : Icon(
                             Icons.circle_outlined,
                             color: ColorConstants.muted,
-                            size: 20.sp,
+                            size: 23,
                           ),
                     title: Text(
                       "SELF EMPLOYED",

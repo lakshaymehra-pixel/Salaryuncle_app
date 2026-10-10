@@ -51,25 +51,32 @@ class OtpScreen extends GetView<LogingController> {
         ),
       ),
       backgroundColor: ColorConstants.greenDeep,
-      body: Obx(() {
+      // No Obx around the whole tree: LayoutBuilder defers its callback to the
+      // layout phase, so an enclosing Obx sees zero observable reads during
+      // build and throws. The reactive leaves below are wrapped individually.
+      body: Builder(builder: (context) {
         return Container(
           width: Get.width,
           height: Get.height,
           decoration: const BoxDecoration(gradient: ColorConstants.loanCardGradient),
           child: SafeArea(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 26.sp),
-              physics: const ClampingScrollPhysics(),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: Get.height - MediaQuery.of(context).padding.vertical - 1),
-                child: Column(
+            child: LayoutBuilder(builder: (context, box) {
+              return SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 26.sp),
+                // No scroll in the normal case: the column fits the viewport and
+                // only scrolls when the keyboard shrinks it.
+                physics: const ClampingScrollPhysics(),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: box.maxHeight),
+                  child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(height: 24.sp),
+                  SizedBox(height: 16.sp),
                   // Gold lock emblem
                   Container(
-                    height: 78.sp,
-                    width: 78.sp,
+                    height: 86,
+                    width: 86,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.06),
@@ -77,7 +84,7 @@ class OtpScreen extends GetView<LogingController> {
                       border: Border.all(color: ColorConstants.goldText.withOpacity(0.4), width: 1.5),
                       boxShadow: [BoxShadow(color: ColorConstants.gold.withOpacity(0.25), blurRadius: 40)],
                     ),
-                    child: Icon(Icons.lock_outline_rounded, color: ColorConstants.goldText, size: 38.sp),
+                    child: Icon(Icons.lock_outline_rounded, color: ColorConstants.goldText, size: 36),
                   ),
                   SizedBox(height: 18.sp),
                   RichText(
@@ -97,7 +104,7 @@ class OtpScreen extends GetView<LogingController> {
                     _maskedNumber(),
                     style: TextStyle(color: ColorConstants.goldText, fontSize: 17.sp, fontWeight: FontWeight.w700),
                   ),
-                  SizedBox(height: 34.sp),
+                  SizedBox(height: 26.sp),
                   // Pin boxes
                   Pinput(
                     length: 4,
@@ -118,7 +125,7 @@ class OtpScreen extends GetView<LogingController> {
                       controller.OTP.value = pin;
                     },
                   ),
-                  SizedBox(height: 30.sp),
+                  SizedBox(height: 24.sp),
                   // Verify button (gold)
                   GestureDetector(
                     onTap: () {
@@ -133,22 +140,22 @@ class OtpScreen extends GetView<LogingController> {
                         borderRadius: BorderRadius.circular(16.sp),
                         boxShadow: [BoxShadow(color: ColorConstants.gold.withOpacity(0.4), blurRadius: 20, offset: const Offset(0, 8))],
                       ),
-                      child: controller.isLoadingOnRegister.value
-                          ? SizedBox(
-                              height: 22.sp,
-                              width: 22.sp,
+                      child: Obx(() => controller.isLoadingOnRegister.value
+                          ? const SizedBox(
+                              height: 24,
+                              width: 24,
                               child: CircularProgressIndicator(strokeWidth: 2.6, valueColor: AlwaysStoppedAnimation(ColorConstants.greenDeep)),
                             )
                           : Text('Verify & Continue',
-                              style: TextStyle(color: ColorConstants.greenDeep, fontSize: 15.sp, fontWeight: FontWeight.w800)),
+                              style: TextStyle(color: ColorConstants.greenDeep, fontSize: 15.sp, fontWeight: FontWeight.w800))),
                     ),
                   ),
                   SizedBox(height: 20.sp),
                   // Resend
-                  controller.isResend.value
+                  Obx(() => controller.isResend.value
                       ? InkWell(
                           onTap: () {
-                            controller.isResend.value == false;
+                            controller.isResend.value = false;
                             controller.reSendOTP();
                           },
                           child: RichText(
@@ -175,7 +182,7 @@ class OtpScreen extends GetView<LogingController> {
                             }
                             controller.isResend.value = true;
                           },
-                        ),
+                        )),
                   SizedBox(height: 20.sp),
                   // Change number
                   InkWell(
@@ -192,7 +199,7 @@ class OtpScreen extends GetView<LogingController> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.arrow_back_rounded, size: 16.sp, color: ColorConstants.goldText),
+                          Icon(Icons.arrow_back_rounded, size: 18, color: ColorConstants.goldText),
                           SizedBox(width: 8.sp),
                           Text('Change Phone Number',
                               style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w700, color: ColorConstants.goldText)),
@@ -200,15 +207,16 @@ class OtpScreen extends GetView<LogingController> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 40.sp),
+                  SizedBox(height: 24.sp),
                   Text('Your data is 256-bit encrypted & never shared',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white.withOpacity(0.4), fontSize: 11)),
-                  SizedBox(height: 20.sp),
+                  SizedBox(height: 16.sp),
                 ],
-              ),
-              ),
-            ),
+                  ),
+                ),
+              );
+            }),
           ),
         );
       }),

@@ -40,7 +40,7 @@ AppBar CustomAppbar(
     toolbarHeight: Get.height * 0.1,
     title: isImage
         ? SizedBox(
-            height: 33.sp,
+            height: 44,
             child: Image.asset(
               ImageConstants.logo,
               // colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),

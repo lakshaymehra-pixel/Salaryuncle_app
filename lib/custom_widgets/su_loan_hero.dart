@@ -62,7 +62,7 @@ class SuLoanHero extends StatelessWidget {
                   color: ColorConstants.cardTintLight,
                   borderRadius: BorderRadius.circular(9.sp),
                 ),
-                child: Icon(Icons.account_balance_wallet_rounded, color: ColorConstants.primary, size: 18.sp),
+                child: Icon(Icons.account_balance_wallet_rounded, color: ColorConstants.primary, size: 21),
               ),
               SizedBox(width: 10.sp),
               Text(title,
@@ -74,7 +74,7 @@ class SuLoanHero extends StatelessWidget {
                   children: [
                     Text('Details',
                         style: TextStyle(color: ColorConstants.muted, fontSize: 12.5.sp, fontWeight: FontWeight.w600)),
-                    Icon(Icons.chevron_right_rounded, color: ColorConstants.muted, size: 16.sp),
+                    Icon(Icons.chevron_right_rounded, color: ColorConstants.muted, size: 18),
                   ],
                 ),
               ),
@@ -92,15 +92,20 @@ class SuLoanHero extends StatelessWidget {
                     Text(amountLabel,
                         style: TextStyle(color: ColorConstants.muted, fontSize: 12.5.sp, fontWeight: FontWeight.w500)),
                     SizedBox(height: 4.sp),
-                    Text(
-                      amount,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: ColorConstants.ink,
-                        fontSize: 26.sp,
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: -0.5,
+                    // Shrink to fit instead of truncating: a long amount like
+                    // ₹100000 must stay fully readable.
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        amount,
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: ColorConstants.ink,
+                          fontSize: 22.sp,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: -0.5,
+                        ),
                       ),
                     ),
                   ],
@@ -134,7 +139,7 @@ class SuLoanHero extends StatelessWidget {
           SizedBox(height: 12.sp),
           Row(
             children: [
-              Icon(Icons.circle, color: ColorConstants.gold, size: 8.sp),
+              Icon(Icons.circle, color: ColorConstants.gold, size: 16),
               SizedBox(width: 6.sp),
               Text(interestNote,
                   style: TextStyle(color: ColorConstants.muted, fontSize: 12.sp, fontWeight: FontWeight.w500)),
@@ -184,7 +189,7 @@ class SuLoanHero extends StatelessWidget {
                 color: (done || active) ? color : ColorConstants.surfaceLight,
                 border: Border.all(color: color, width: 2),
               ),
-              child: done ? Icon(Icons.check, size: 10.sp, color: Colors.white) : null,
+              child: done ? Icon(Icons.check, size: 16, color: Colors.white) : null,
             ),
             SizedBox(height: 6.sp),
             Text(

@@ -32,10 +32,10 @@ class CustomDropdown extends StatelessWidget {
       child: DropdownButtonHideUnderline(
         child: DropdownButton2(
           iconStyleData: IconStyleData(
-              icon: Icon(
+              icon: const Icon(
                 Icons.keyboard_arrow_down_rounded,
                 color: ColorConstants.primary,
-                size: 22.sp,
+                size: 24,
               )),
           isExpanded: true,
           dropdownStyleData: DropdownStyleData(

@@ -18,12 +18,12 @@ class CustomProfilePicView extends StatelessWidget {
           color: ColorConstants.surfaceLight,
           border: Border.all(color: ColorConstants.border, width: 1.5),
           shape: BoxShape.circle),
-      height: 35.sp,
-      width: 35.sp,
+      height: 44,
+      width: 44,
       child: Icon(
         Icons.person,
         color: ColorConstants.primary,
-        size: 30.sp,
+        size: 34,
       ),
     )
         : prefs.getString(SharedConstants.PROFILE_PIC) == null
@@ -32,12 +32,12 @@ class CustomProfilePicView extends StatelessWidget {
           color: ColorConstants.surfaceLight,
           border: Border.all(color: ColorConstants.border, width: 1.5),
           shape: BoxShape.circle),
-      height: 35.sp,
-      width: 35.sp,
+      height: 44,
+      width: 44,
       child: Icon(
         Icons.person,
         color: ColorConstants.primary,
-        size: 30.sp,
+        size: 34,
       ),
     )
         : (prefs.getBool(SharedConstants.IS_EDITABLE) ?? false)
@@ -48,7 +48,7 @@ class CustomProfilePicView extends StatelessWidget {
       child: Badge(
         backgroundColor: ColorConstants.primary,
         padding: EdgeInsets.all(8.sp),
-        label: Icon(Icons.edit, color: Colors.white, size: 15.sp),
+        label: Icon(Icons.edit, color: Colors.white, size: 17),
         alignment: AlignmentDirectional.bottomEnd,
         offset: const Offset(-4, -18),
         child: CircleAvatar(
@@ -63,12 +63,12 @@ class CustomProfilePicView extends StatelessWidget {
                       color: ColorConstants.surfaceLight,
                       border: Border.all(color: ColorConstants.border, width: 1.5),
                       shape: BoxShape.circle),
-                  height: 35.sp,
-                  width: 35.sp,
+                  height: 44,
+                  width: 44,
                   child: Icon(
                     Icons.person,
                     color: ColorConstants.primary,
-                    size: 30.sp,
+                    size: 34,
                   ),
                 );
               },
@@ -104,12 +104,12 @@ class CustomProfilePicView extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(color: Theme.of(context).shadowColor),
                   shape: BoxShape.circle),
-              height: 35.sp,
-              width: 35.sp,
+              height: 44,
+              width: 44,
               child: Icon(
                 Icons.person,
                 color: Theme.of(context).shadowColor,
-                size: 30.sp,
+                size: 34,
               ),
             );
           },

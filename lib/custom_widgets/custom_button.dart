@@ -41,9 +41,9 @@ class CustomButton extends StatelessWidget {
             onTap: onPressed,
             child: Center(
               child: isLoading
-                  ? SpinKitThreeBounce(
+                  ? const SpinKitThreeBounce(
                       color: Colors.white,
-                      size: 20.sp,
+                      size: 22,
                     )
                   : Text(
                       text,

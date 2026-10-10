@@ -20,8 +20,8 @@ class ManagerDetailsPage extends StatelessWidget {
 
             // Profile picture
             SizedBox(
-              height: 45.sp,
-              width: 45.sp,
+              height: 67,
+              width: 67,
               child: const CircleAvatar(
                   radius: 50,
                   foregroundColor: Colors.black,
@@ -41,7 +41,7 @@ class ManagerDetailsPage extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 35.sp),
+            SizedBox(height: 44),
 
             // Details
             Container(

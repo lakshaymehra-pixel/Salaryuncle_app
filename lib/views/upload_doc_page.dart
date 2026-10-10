@@ -180,7 +180,7 @@ class DocPage extends GetView<DocController> {
                                                   borderRadius: BorderRadius.circular(9.sp),
                                                 ),
                                                 child: Icon(Icons.description_rounded,
-                                                    color: ColorConstants.primary, size: 16.sp),
+                                                    color: ColorConstants.primary, size: 18),
                                               ),
                                               SizedBox(width: 10.sp),
                                               Expanded(
@@ -201,8 +201,8 @@ class DocPage extends GetView<DocController> {
                                                     ? ClipRRect(
                                                         borderRadius: BorderRadius.circular(10.sp),
                                                         child: SizedBox(
-                                                            height: 43.sp,
-                                                            width: 80.sp,
+                                                            height: 61,
+                                                            width: 140,
                                                             child: Image.file(
                                                               controller.saveDocList[index].file,
                                                               fit: BoxFit.fill,
@@ -313,7 +313,7 @@ class DocPage extends GetView<DocController> {
                           // }
                         })
                     : SizedBox(
-                        height: 90.sp,
+                        height: 150,
                         width: 30.sp,
                         child: Center(
                           child: CircularProgressIndicator(

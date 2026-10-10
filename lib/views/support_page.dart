@@ -44,7 +44,7 @@ class SupportPage extends StatelessWidget {
               context: context,
               icon: FaIcon(
                 FontAwesomeIcons.phone,
-                size: 24.sp,
+                size: 22,
                 color: Theme.of(context).primaryColor,
               ),
               title: 'Call Us',
@@ -62,7 +62,7 @@ class SupportPage extends StatelessWidget {
               context: context,
               icon: FaIcon(
                 FontAwesomeIcons.whatsapp,
-                size: 25.sp,
+                size: 22,
                 color: Theme.of(context).primaryColor,
               ),
               title: 'Text Us',
@@ -77,7 +77,7 @@ class SupportPage extends StatelessWidget {
             _buildDivider(
               context: context,
               icon: Icon(
-                size: 25.sp,
+                size: 22,
                 Icons.mail,
                 color: Theme.of(context).primaryColor,
               ),
@@ -96,7 +96,7 @@ class SupportPage extends StatelessWidget {
             _buildDivider(
               context: context,
               icon: Icon(
-                size: 25.sp,
+                size: 22,
                 Icons.alarm_on_rounded,
                 color: Theme.of(context).primaryColor,
               ),
@@ -108,7 +108,7 @@ class SupportPage extends StatelessWidget {
             // _buildDivider(
             //   context: context,
             //   icon: Icon(
-            //     size: 25.sp,
+            //     size: 22,
             //     FontAwesomeIcons.rankingStar,
             //     color: Theme.of(context).primaryColor,
             //   ),
@@ -128,7 +128,7 @@ class SupportPage extends StatelessWidget {
               context: context,
               icon: FaIcon(
                 FontAwesomeIcons.link,
-                size: 25.sp,
+                size: 22,
                 color: Theme.of(context).primaryColor,
               ),
               title: 'Website',
@@ -175,8 +175,8 @@ class SupportPage extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    height: 40.sp,
-                    width: 40.sp,
+                    height: 53,
+                    width: 53,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
@@ -185,7 +185,7 @@ class SupportPage extends StatelessWidget {
                     child: Icon(
                       Icons.map,
                       color: ColorConstants.primary,
-                      size: 22.sp,
+                      size: 25,
                     ),
                   ),
                   SizedBox(
@@ -288,7 +288,7 @@ class SupportPage extends StatelessWidget {
                 ),
               ],
             ),
-            ), SizedBox(height: 40.sp),
+            ), SizedBox(height: 53),
           ],
         ),
       ),
@@ -298,7 +298,7 @@ class SupportPage extends StatelessWidget {
   Widget _buildDivider({
     required String title,
     required String value,
-    required Icon icon,
+    required Widget icon,
     required BuildContext context,
     required Function()? onTap,
   }) {
@@ -314,8 +314,8 @@ class SupportPage extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            height: 40.sp,
-            width: 40.sp,
+            height: 53,
+            width: 53,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               shape: BoxShape.circle,

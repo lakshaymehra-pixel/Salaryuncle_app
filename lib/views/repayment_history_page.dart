@@ -37,7 +37,7 @@ class RepaymentHistoryPage extends GetView<RepaymentHistoryController> {
                           ),
                           Expanded(
                             child: ListView.builder(
-                                padding: EdgeInsets.fromLTRB(16.sp, 4.sp, 16.sp, 110.sp),
+                                padding: EdgeInsets.fromLTRB(16.sp, 4.sp, 16.sp, 90),
                                 itemCount: controller.collection.length,
                                 itemBuilder: (context, index) {
                                   return _buildPaymentCard(controller.collection[index], context);
@@ -98,8 +98,8 @@ class RepaymentHistoryPage extends GetView<RepaymentHistoryController> {
             children: [
               // Left square icon badge (success-tinted receipt icon)
               Container(
-                width: 46.sp,
-                height: 46.sp,
+                width: 70,
+                height: 70,
                 decoration: BoxDecoration(
                   color: ColorConstants.success.withOpacity(0.12),
                   borderRadius: BorderRadius.circular(14.sp),
@@ -107,7 +107,7 @@ class RepaymentHistoryPage extends GetView<RepaymentHistoryController> {
                 child: Icon(
                   Icons.receipt_long_rounded,
                   color: ColorConstants.success,
-                  size: 22.sp,
+                  size: 25,
                 ),
               ),
               SizedBox(width: 12.sp),

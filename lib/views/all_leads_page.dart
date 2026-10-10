@@ -101,7 +101,7 @@ class AllLeadsPage extends StatelessWidget {
                   ),
                   /**Column Contains Card for Banner & Grid view for Leads */
 
-                  SizedBox(height: 110.sp),
+                  SizedBox(height: 90),
                 ],
               ),
             ),
@@ -131,14 +131,14 @@ class AllLeadsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 34.sp,
-            width: 34.sp,
+            height: 44,
+            width: 44,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: tint,
               borderRadius: BorderRadius.circular(11.sp),
             ),
-            child: Icon(icon, color: iconColor, size: 19.sp),
+            child: Icon(icon, color: iconColor, size: 22),
           ),
           SizedBox(height: 12.sp),
           Text(
@@ -206,14 +206,14 @@ class AllLeadsPage extends StatelessWidget {
           children: [
             // Left square icon badge, tinted by status.
             Container(
-              height: 44.sp,
-              width: 44.sp,
+              height: 64,
+              width: 64,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: statusColor.withOpacity(0.12),
                 borderRadius: BorderRadius.circular(13.sp),
               ),
-              child: Icon(badgeIcon, color: statusColor, size: 22.sp),
+              child: Icon(badgeIcon, color: statusColor, size: 25),
             ),
             SizedBox(width: 12.sp),
             // Body: loan number + apply date • status.

@@ -12,6 +12,7 @@ import 'package:tejas_loan/views/all_leads_page.dart';
 import 'package:tejas_loan/views/repayment_history_page.dart';
 import 'package:tejas_loan/views/profile_page.dart';
 
+import '../controller/repayment_controller.dart';
 import '../controller/status_controller.dart';
 import '../services/api_constant/api_constants.dart';
 import '../utils/color_constants.dart';
@@ -22,6 +23,11 @@ class DashbroadPage extends GetView<DashbroadController> {
   DashbroadController controller = Get.put(DashbroadController());
   StatusController controller1 = Get.put(StatusController());
   ConnectionManagerController connectionManagerController = Get.put(ConnectionManagerController());
+
+  /// The Payments tab builds RepaymentHistoryPage directly instead of going
+  /// through its route, so its binding never runs — register it here or
+  /// GetView's Get.find throws and the tab renders blank.
+  final RepaymentHistoryController _repaymentHistoryController = Get.put(RepaymentHistoryController());
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +182,7 @@ class _SuBottomNav extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 21.sp, color: active ? ColorConstants.goldText : Colors.white.withOpacity(0.55)),
+            Icon(icon, size: 22, color: active ? ColorConstants.goldText : Colors.white.withOpacity(0.55)),
             if (active) ...[
               SizedBox(width: 6.sp),
               Text(label,
@@ -277,12 +283,12 @@ class _SuBottomNav extends StatelessWidget {
 //                                           border:
 //                                               Border.all(color: Colors.white),
 //                                           shape: BoxShape.circle),
-//                                       height: 35.sp,
-//                                       width: 35.sp,
+//                                       height: 44,
+//                                       width: 44,
 //                                       child: Icon(
 //                                         Icons.person,
 //                                         color: Colors.white,
-//                                         size: 30.sp,
+//                                         size: 34,
 //                                       ),
 //                                     ),
 //                                     SizedBox(

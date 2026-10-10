@@ -31,8 +31,8 @@ class ThankyouPage extends StatelessWidget {
                     boxShadow: ColorConstants.softShadow,
                   ),
                   child: Container(
-                  height: 70.sp,
-                  width: 70.sp,
+                  height: 150,
+                  width: 150,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: ColorConstants.success.withOpacity(0.12),
@@ -42,8 +42,8 @@ class ThankyouPage extends StatelessWidget {
                       backgroundLoading: true,
                       frameRate: const FrameRate(60),
                       fit: BoxFit.fitHeight,
-                      height: 55.sp,
-                      width: 55.sp,
+                      height: 120,
+                      width: 120,
                       repeat: false,
                       'https://lottie.host/07f22094-2144-4c1f-8fd7-e878afb7ac41/mg3s1WtVZR.json'),
                 ),
@@ -82,8 +82,8 @@ class ThankyouPage extends StatelessWidget {
 }
 
 // Container(
-//   height: 100.sp,
-//   width: 50.sp,
+//   height: 180,
+//   width: 83,
 //   child: Lottie.network(
 //     onLoaded: (a) {
 //       print(a.seconds);

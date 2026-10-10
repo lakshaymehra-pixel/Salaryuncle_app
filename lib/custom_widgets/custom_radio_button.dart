@@ -17,7 +17,7 @@ class CustomRadioButton extends StatelessWidget {
     return Flexible(
       flex: isLongButton?0:1,
       child: Container(
-        height: 33.sp,
+        height: 44,
         margin: EdgeInsets.all(8.sp),
         alignment: Alignment.center,
 
