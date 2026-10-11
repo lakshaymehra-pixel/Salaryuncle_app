@@ -130,6 +130,9 @@ The same applies to any builder that defers its callback.
 
 ## 🚀 Getting started
 
+Setting up on a fresh machine? Follow [SETUP.md](SETUP.md) — there are two cached
+packages that need patching or the build fails, and a JDK version that matters.
+
 ```bash
 flutter pub get
 flutter run                 # debug on a connected device
