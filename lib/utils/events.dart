@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tejas_loan/main.dart';
@@ -32,12 +33,14 @@ class Events {
         Get.offAllNamed(RoutesName.LoginScreen);
         break;
 
+      // OTP_VERIFY means the OTP is done and Occupation is next; sending the
+      // user back to Login here would loop them out of a verified session.
       case OTP_VERIFY:
-        Get.offAllNamed(RoutesName.LoginScreen);
+        Get.offAllNamed(RoutesName.OccupationScreen);
         break;
 
       case RESEND_OTP:
-        Get.offAllNamed(RoutesName.LoginScreen);
+        Get.offAllNamed(RoutesName.OccupationScreen);
         break;
 
       case PANCARD:
@@ -102,8 +105,14 @@ class Events {
         Get.offAllNamed(RoutesName.DashbroadScreen);
         break;
 
+      // An unknown stage is not proof the session is invalid - logging the
+      // user out here would throw away a working login over a stage string
+      // this build does not know yet.
       default:
-        logout();
+        if (kDebugMode) {
+          print("Unhandled step_stage: $eventName");
+        }
+        Get.offAllNamed(RoutesName.DashbroadScreen);
         break;
     }
   }

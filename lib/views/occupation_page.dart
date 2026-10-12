@@ -215,6 +215,10 @@ class OccupationPage extends GetView<OccupationController> {
                     //     5000) {
                     prefs.setString(
                         SharedConstants.LOAN_AMOUNT, (controller.currentLoanAmount.value * 100000).toInt().toString());
+                    // The backend has no occupation event, so record the next
+                    // stage here; otherwise a resume sends the user back to
+                    // this screen until PAN is submitted.
+                    prefs.setString(SharedConstants.STEP_STAGE, Events.PANCARD);
                     Get.toNamed(RoutesName.PanScreen);
                     // } else {
                     //   ShortMessage.toast(

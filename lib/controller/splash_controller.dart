@@ -13,10 +13,13 @@ class SplashController extends GetxController {
           (prefs.getBool(SharedConstants.ISLOGIN) == false)) {
         Get.toNamed(RoutesName.LoginScreen);
       } else {
-        if (prefs.getString(SharedConstants.STEP_STAGE) == Events.PANCARD) {
-          Get.offAllNamed(RoutesName.PanScreen);
-        } else {
+        // Resume at the stage the server last reported instead of assuming
+        // anything but PAN means the application is finished.
+        final stage = prefs.getString(SharedConstants.STEP_STAGE) ?? "";
+        if (stage.isEmpty || stage == Events.COMPLETED) {
           Get.offAllNamed(RoutesName.DashbroadScreen);
+        } else {
+          Events.getNextEvent(stage);
         }
       }
     });

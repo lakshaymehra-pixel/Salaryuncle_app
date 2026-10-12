@@ -261,10 +261,15 @@ class LogingController extends GetxController {
                 prefs.setString(SharedConstants.STEP_STAGE, result['Data']['next_step'] ?? "");
                 prefs.setInt(SharedConstants.STEP_COMPLETE_PERCENT, result['Data']['step_percentage'] ?? 0);
 
+                // A returning user resumes past PAN at the step the server
+                // reports. Everyone still at or before PAN starts at
+                // Occupation: it is a client-side gate the backend has no
+                // stage for, so the server reports PAN as next even for a
+                // user who has not passed through Occupation yet.
                 if (Events.getCurrentEvent() > 3) {
                   Get.offAllNamed(RoutesName.DashbroadScreen);
                 } else {
-                  Get.offAllNamed(RoutesName.PanScreen);
+                  Get.offAllNamed(RoutesName.OccupationScreen);
                 }
               } else {
                 prefs.setBool(SharedConstants.ISLOGIN, false);

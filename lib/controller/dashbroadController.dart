@@ -129,28 +129,15 @@ class DashbroadController extends GetxController {
   getLeadStatus(var leadId) async {
     if (loadingOnDashboard.value == false) {
       loadingOnDashboard.value = true;
-      var stepStage = prefs.getInt(SharedConstants.STEP_STAGE) ?? 1;
-
-      if (stepStage == 1) {
-        Get.toNamed(RoutesName.PanScreen);
-      } else if (stepStage == 2) {
-        Get.toNamed(RoutesName.ResidenceDetailsScreen);
-      } else if (stepStage == 3) {
-        Get.toNamed(RoutesName.PersonalDetailsScreen);
-      } else if (stepStage == 4) {
-        Get.toNamed(RoutesName.IncomeDetailsScreen);
-      } else if (stepStage == 5) {
-        Get.toNamed(RoutesName.DocScreen, arguments: [true]);
-      } else if (stepStage == 6) {
-        Get.toNamed(RoutesName.DocScreen, arguments: [false]);
-      } else if (stepStage == 7) {
-        Get.toNamed(RoutesName.EmploymentDetailsScreen);
-      } else if (stepStage == 8) {
-        Get.toNamed(RoutesName.LoanSelect, arguments: false);
-      } else if (stepStage >= 9) {
-        Get.toNamed(RoutesName.LoanSelect, arguments: false);
-      } else {
+      // STEP_STAGE is written as the server's stage string everywhere, so
+      // read it as one and let Events map it to the right screen. This used
+      // to call getInt on that String key, which always returned null and
+      // sent every user to the PAN screen.
+      final stage = prefs.getString(SharedConstants.STEP_STAGE) ?? "";
+      if (stage.isEmpty) {
         Get.toNamed(RoutesName.OccupationScreen);
+      } else {
+        Events.getNextEvent(stage);
       }
 
       loadingOnDashboard.value = false;

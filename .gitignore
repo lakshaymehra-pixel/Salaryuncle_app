@@ -93,3 +93,6 @@ android/build/
 # Old STU keystore (never commit)
 android/Key
 **/Key
+
+# Flutter iOS build artifacts (regenerated on every build)
+ios/Flutter/ephemeral/
