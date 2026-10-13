@@ -10,6 +10,7 @@ import '../main.dart';
 import '../routes/routes_names.dart';
 import '../services/api_constant/api_constants.dart';
 import '../services/api_service.dart';
+import '../utils/events.dart';
 import '../utils/shared_constants.dart';
 import 'internet_connectivity_controller.dart';
 
@@ -30,8 +31,8 @@ class AadhaarController extends GetxController {
     okyc_aadhaar.aadhaarNumber = number;
     if (connectionManagerController.connectivityResult !=
         ConnectivityResult.none) {
-      if (aadhaarController.value.text.length >= 10) {
-        if (isEnabled.value == false) {
+      if (aadhaarController.value.text.length == 12) {
+        if (isEnabled.value == false && isLoadingOnSendOTP.value == false) {
           isLoadingOnSendOTP.value = true;
 
           try {
@@ -67,7 +68,7 @@ class AadhaarController extends GetxController {
           }
         }
       } else {
-        ShortMessage.toast(title: "Invalid Number !!");
+        ShortMessage.toast(title: "Enter a 12-digit Aadhaar number");
       }
     } else {
       ShortMessage.toast(title: "Check Internet Connection");
@@ -76,6 +77,10 @@ class AadhaarController extends GetxController {
 
   verifyOTP() async {
     debugPrint("OTP==>${OTP.value}");
+    if (request_Id.value.isEmpty) {
+      Fluttertoast.showToast(msg: "Send the OTP first");
+      return;
+    }
     if (OTP.value.length == 6) {
       try {
         isLoadingProceed.value = true;
@@ -96,13 +101,31 @@ class AadhaarController extends GetxController {
             );
             prefs.setString(
                 SharedConstants.AADHAAR, aadhaarController.value.text);
-            prefs.setString(
-                SharedConstants.CURRENTSCREEN, RoutesName.BankScreen);
 
-            Get.offAllNamed(RoutesName.BankScreen);
+            // Hardcoding BankScreen here skipped whatever step the user still
+            // owed (Employment, for one). Follow the stage the server reports,
+            // and only fall back to Bank if it does not report one.
+            final stage = prefs.getString(SharedConstants.STEP_STAGE) ?? "";
+            if (stage.isNotEmpty && stage != Events.COMPLETED) {
+              Events.getNextEvent(stage);
+            } else {
+              prefs.setString(
+                  SharedConstants.CURRENTSCREEN, RoutesName.BankScreen);
+              Get.offAllNamed(RoutesName.BankScreen);
+            }
+          } else {
+            // Without this the screen just sat there on a wrong OTP, giving
+            // the user no reason for the failure.
+            Fluttertoast.showToast(
+              msg: aadhaarOTP_Responsse.message?.toString().isNotEmpty == true
+                  ? aadhaarOTP_Responsse.message.toString()
+                  : "Aadhaar verification failed. Check the OTP and try again.",
+            );
+            OTP.value = "";
           }
         } else {
           isLoadingProceed.value = false;
+          Fluttertoast.showToast(msg: "Could not reach the server. Try again.");
         }
       } catch (e) {
         isLoadingProceed.value = false;

@@ -21,8 +21,9 @@ class AdhaarPage extends GetView<AadhaarController> {
   AdhaarPage({super.key}) ;
 
   final defaultPinTheme = PinTheme(
-    width: 56,
-    height: 56,
+    width: 42,
+    height: 50,
+    margin: const EdgeInsets.symmetric(horizontal: 3),
     textStyle: const TextStyle(fontSize: 20, color: ColorConstants.ink, fontWeight: FontWeight.w600),
     decoration: BoxDecoration(
       border: Border.all(color: ColorConstants.border),
@@ -32,16 +33,6 @@ class AdhaarPage extends GetView<AadhaarController> {
 
   @override
   Widget build(BuildContext context) {
-    defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: ColorConstants.primary),
-      borderRadius: BorderRadius.circular(14),
-    );
-
-    defaultPinTheme.copyWith(
-      decoration: defaultPinTheme.decoration!.copyWith(
-        color: ColorConstants.cardTintLight,
-      ),
-    );
     return Obx(() {
       return CustomBackground(
         height: Get.height * 0.8,
@@ -66,7 +57,11 @@ class AdhaarPage extends GetView<AadhaarController> {
           CustomInputField(
             isEdit: controller.isEnabled.value,
             onEditPressed: () {
+              // Editing the number invalidates the OTP that was sent for the
+              // old one, so clear both rather than leaving a stale request id.
               controller.isEnabled.value = false;
+              controller.OTP.value = "";
+              controller.request_Id.value = "";
               ShortMessage.toast(title: "Edit your number");
             },
             height: Get.height * 0.13,
@@ -83,19 +78,71 @@ class AdhaarPage extends GetView<AadhaarController> {
               controller.sendAadhaarOTP(controller.aadhaarController.value.text);
             },
           ),
+          SizedBox(height: 12.sp),
+          // CustomInputField's own button renders a hardcoded calendar icon
+          // (it was written for date fields), so this screen needs its own.
+          if (!controller.isEnabled.value)
+            SizedBox(
+              width: double.infinity,
+              child: CustomButton(
+                onPressed: () => controller
+                    .sendAadhaarOTP(controller.aadhaarController.value.text),
+                isLoading: controller.isLoadingOnSendOTP.value,
+                text: 'Send OTP',
+                height: Get.height * 0.055,
+              ),
+            ),
             ],
           ),
-          // Pinput(
-          //   defaultPinTheme: defaultPinTheme,
-          //   focusedPinTheme: focusedPinTheme,
-          //   submittedPinTheme: submittedPinTheme,
-          //   validator: (s) {
-          //     return s == '2222' ? null : 'Pin is incorrect';
-          //   },
-          //   pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-          //   showCursor: true,
-          //   onCompleted: (pin) => print(pin),
-          // ),
+          // Shown once the OTP has actually been sent; UIDAI sends a 6-digit code.
+          if (controller.isEnabled.value) ...[
+            SizedBox(height: 18.sp),
+            SuFormCard(
+              icon: Icons.sms_outlined,
+              title: "Enter Aadhaar OTP",
+              subtitle: "6-digit code sent to your Aadhaar-linked mobile",
+              children: [
+                SizedBox(height: 10.sp),
+                Center(
+                  child: Pinput(
+                    length: 6,
+                    defaultPinTheme: defaultPinTheme,
+                    focusedPinTheme: defaultPinTheme.copyDecorationWith(
+                      border: Border.all(color: ColorConstants.primary, width: 1.6),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    submittedPinTheme: defaultPinTheme.copyWith(
+                      decoration: defaultPinTheme.decoration!.copyWith(
+                        color: ColorConstants.cardTintLight,
+                      ),
+                    ),
+                    showCursor: true,
+                    keyboardType: TextInputType.number,
+                    onChanged: (pin) => controller.OTP.value = pin,
+                    onCompleted: (pin) => controller.OTP.value = pin,
+                  ),
+                ),
+                SizedBox(height: 12.sp),
+                Center(
+                  child: TextButton(
+                    onPressed: controller.isLoadingOnSendOTP.value
+                        ? null
+                        : () {
+                            controller.isEnabled.value = false;
+                            controller.OTP.value = "";
+                            controller.request_Id.value = "";
+                            controller.sendAadhaarOTP(controller.aadhaarController.value.text);
+                          },
+                    child: Text("Resend OTP",
+                        style: TextStyle(
+                            color: ColorConstants.primary,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 13.sp)),
+                  ),
+                ),
+              ],
+            ),
+          ],
           SizedBox(
             height: 30.sp,
           ),
@@ -113,6 +160,7 @@ class AdhaarPage extends GetView<AadhaarController> {
               }
             },
             text: 'Proceed',
+            isLoading: controller.isLoadingProceed.value,
             height: Get.height * 0.06,
           ),
         ],

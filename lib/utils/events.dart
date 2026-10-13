@@ -130,10 +130,7 @@ class Events {
       RoutesName.PersonalDetailsScreen,
       RoutesName.ResidenceDetailsScreen,
       RoutesName.IncomeDetailsScreen,
-      // AadhaarScreen is deliberately absent: its send-OTP button is never
-      // rendered (isButton: false) and its OTP field is commented out, so
-      // routing back into it would strand the user on a screen that cannot
-      // be completed.
+      RoutesName.AadhaarScreen,
       RoutesName.EmploymentDetailsScreen,
       RoutesName.LoanSelect,
       RoutesName.DocScreen,
