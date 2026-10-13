@@ -22,7 +22,7 @@ class OccupationPage extends GetView<OccupationController> {
   Widget build(BuildContext context) {
     return Obx(
       () => CustomBackground(
-        isAppBarVisible: false,
+        isAppBarVisible: true,
         enableBottomNav: false,
         height: Get.height * 0.8,
         heightOfUpperBox: Get.height * 0.6,

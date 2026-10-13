@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tejas_loan/custom_widgets/custom_toast_snack_bar.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tejas_loan/controller/dashbroadController.dart';
 import 'package:tejas_loan/controller/preview_controller.dart';
@@ -294,11 +295,13 @@ class BasicDetailsCard extends StatelessWidget {
                 ),
               ),
               ElevatedButton.icon(
-                onPressed: () {
-                  if (enableEdit) {
-                    Get.offAllNamed(routeName, arguments: argument);
-                  }
-                },
+                // Disabled rather than silently inert: a tappable button that
+                // does nothing reads as a broken app. onPressed: null also
+                // greys it out natively.
+                onPressed: enableEdit
+                    ? () => Get.toNamed(routeName, arguments: argument)
+                    : () => ShortMessage.toast(
+                        title: "This section can't be edited at this stage"),
                 icon: const Icon(
                   Icons.edit,
                   size: 16,

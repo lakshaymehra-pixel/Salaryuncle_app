@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tejas_loan/views/support_page.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -117,7 +118,9 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-        Container(
+        GestureDetector(
+          onTap: () => _showNotifications(context),
+          child: Container(
           height: 59,
           width: 59,
           alignment: Alignment.center,
@@ -130,23 +133,91 @@ class HomePage extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Icon(Icons.notifications_none_rounded, color: ColorConstants.greenDeep, size: 23),
-              Positioned(
-                top: 10.sp,
-                right: 11.sp,
-                child: Container(
-                  height: 8.sp,
-                  width: 8.sp,
-                  decoration: BoxDecoration(
-                    color: ColorConstants.gold,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 2),
-                  ),
-                ),
-              ),
+
             ],
+          ),
           ),
         ),
       ],
+    );
+  }
+
+  /// Notifications open as a half-height sheet over the dashboard rather than
+  /// a pushed page, so the user never loses their place.
+  void _showNotifications(BuildContext context) {
+    Get.bottomSheet(
+      Container(
+        height: Get.height * 0.55,
+        decoration: BoxDecoration(
+          color: ColorConstants.scaffoldLight,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24.sp)),
+        ),
+        child: Column(
+          children: [
+            SizedBox(height: 10.sp),
+            Container(
+              height: 4,
+              width: 44,
+              decoration: BoxDecoration(
+                color: ColorConstants.border,
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(18.sp, 14.sp, 10.sp, 6.sp),
+              child: Row(
+                children: [
+                  const Icon(Icons.notifications_none_rounded, color: ColorConstants.greenDeep, size: 22),
+                  SizedBox(width: 8.sp),
+                  Expanded(
+                    child: Text('Notifications',
+                        style: TextStyle(
+                            color: ColorConstants.ink, fontSize: 17.sp, fontWeight: FontWeight.w800)),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close_rounded, color: ColorConstants.muted, size: 22),
+                    onPressed: () => Get.back(),
+                  ),
+                ],
+              ),
+            ),
+            Divider(height: 1, color: ColorConstants.border),
+            Expanded(
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 32.sp),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        height: 72,
+                        width: 72,
+                        decoration: BoxDecoration(
+                          color: ColorConstants.greenSoft,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(Icons.notifications_off_outlined,
+                            color: ColorConstants.greenDeep, size: 32),
+                      ),
+                      SizedBox(height: 14.sp),
+                      Text('No notifications yet',
+                          style: TextStyle(
+                              color: ColorConstants.ink, fontSize: 15.sp, fontWeight: FontWeight.w700)),
+                      SizedBox(height: 6.sp),
+                      Text(
+                        'Updates about your loan and repayments will appear here.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: ColorConstants.muted, fontSize: 13.sp),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      isScrollControlled: true,
     );
   }
 

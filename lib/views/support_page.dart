@@ -102,7 +102,9 @@ class SupportPage extends StatelessWidget {
               ),
               title: 'Available Time',
               value: '9:30 AM - 10:30 PM',
-              onTap: () async {},
+              // Informational only - null keeps the InkWell from rippling as
+              // though it were going to do something.
+              onTap: null,
             ),
             // SizedBox(height: 13.sp),
             // _buildDivider(

@@ -31,7 +31,7 @@ class PanDetailsPage extends GetView<PanCardController> {
     return Obx(
       () => CustomBackground(
         isDrawer: false,
-        isAppBarVisible: false,
+        isAppBarVisible: true,
         height: Get.height * 0.5,
         heightOfUpperBox: Get.height * 0.6,
         children: [

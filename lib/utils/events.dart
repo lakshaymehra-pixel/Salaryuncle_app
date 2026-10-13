@@ -117,6 +117,34 @@ class Events {
     }
   }
 
+  /// The screen that precedes [route] in the apply journey.
+  ///
+  /// Every stage transition uses `offAllNamed`, so by the time a user is on a
+  /// step there is nothing left on the navigator to pop and a plain
+  /// `Get.back()` does nothing. This gives the back arrow a real destination:
+  /// the previous step, not the dashboard.
+  static String? previousStepRoute(String route) {
+    const order = <String>[
+      RoutesName.OccupationScreen,
+      RoutesName.PanScreen,
+      RoutesName.PersonalDetailsScreen,
+      RoutesName.ResidenceDetailsScreen,
+      RoutesName.IncomeDetailsScreen,
+      // AadhaarScreen is deliberately absent: its send-OTP button is never
+      // rendered (isButton: false) and its OTP field is commented out, so
+      // routing back into it would strand the user on a screen that cannot
+      // be completed.
+      RoutesName.EmploymentDetailsScreen,
+      RoutesName.LoanSelect,
+      RoutesName.DocScreen,
+      RoutesName.BankScreen,
+      RoutesName.PreviewScreen,
+    ];
+    final i = order.indexOf(route);
+    if (i <= 0) return null; // unknown, or already the first step
+    return order[i - 1];
+  }
+
   static int getCurrentEvent() {
     var eventName = prefs.getString(SharedConstants.STEP_STAGE).toString();
 

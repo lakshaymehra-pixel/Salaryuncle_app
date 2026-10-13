@@ -4,9 +4,12 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../main.dart';
+import '../routes/page_routes.dart';
+import '../routes/routes_names.dart';
 import '../utils/color_constants.dart';
 import '../utils/events.dart';
 import '../utils/shared_constants.dart';
+import 'support_page.dart';
 
 /// Profile tab — mockup style. Shows the user's identity, KYC badge, and
 /// grouped settings/legal menu rows, plus logout. All data comes from prefs;
@@ -74,20 +77,26 @@ class ProfilePage extends StatelessWidget {
               SizedBox(height: 22.sp),
               // ── Account group ──
               _menuGroup([
-                _MenuData(Icons.person_outline_rounded, 'Personal Details', null),
-                _MenuData(Icons.account_balance_outlined, 'Bank Account & eMandate', null),
-                _MenuData(Icons.description_outlined, 'Documents & KYC', null),
-                _MenuData(Icons.bar_chart_rounded, 'Credit Limit', null),
+                _MenuData(Icons.person_outline_rounded, 'Personal Details',
+                    () => _openSheet(RoutesName.PersonalDetailsScreen)),
+                _MenuData(Icons.account_balance_outlined, 'Bank Account & eMandate',
+                    () => _openSheet(RoutesName.BankScreen)),
+                _MenuData(Icons.description_outlined, 'Documents & KYC',
+                    () => _openSheet(RoutesName.DocScreen, arguments: [false])),
+                _MenuData(Icons.bar_chart_rounded, 'Credit Limit',
+                    () => _openSheet(RoutesName.ScoreScreen)),
               ]),
               SizedBox(height: 14.sp),
               // ── Settings / legal group ──
               _menuGroup([
-                _MenuData(Icons.notifications_none_rounded, 'Notifications', null),
-                _MenuData(Icons.help_outline_rounded, 'Help & Support', null),
-                _MenuData(Icons.gavel_rounded, 'Grievance Redressal (RBI)', null),
-                _MenuData(Icons.lock_outline_rounded, 'Privacy Policy & Terms', () async {
-                  await launchUrl(Uri.parse(SharedConstants.Privacy_Policy_Url), mode: LaunchMode.inAppWebView);
-                }),
+                _MenuData(Icons.help_outline_rounded, 'Help & Support', () => Get.to(() => SupportPage())),
+                // No grievance screen exists, so send the user to the support
+                // channels rather than leaving the row dead.
+                _MenuData(Icons.gavel_rounded, 'Grievance Redressal (RBI)', () => Get.to(() => SupportPage())),
+                _MenuData(Icons.lock_outline_rounded, 'Privacy Policy & Terms',
+                    () => _openSheet(RoutesName.PrivacyPolicyPage)),
+                _MenuData(Icons.article_outlined, 'Terms & Conditions',
+                    () => _openSheet(RoutesName.TermsAndConditionsPage)),
               ]),
               SizedBox(height: 14.sp),
               // ── Logout ──
@@ -154,6 +163,44 @@ class ProfilePage extends StatelessWidget {
           );
         }),
       ),
+    );
+  }
+
+  /// Opens a profile section as a sheet over the dashboard instead of pushing
+  /// a full route: those screens carry the apply-flow chrome ("Loan
+  /// Application" header and its own drawer), which is the wrong framing here,
+  /// and a push hides the bottom navigation.
+  ///
+  /// The sheet hosts the real screen, so its own Get.back() still closes it.
+  void _openSheet(String route, {dynamic arguments}) {
+    final page = GetPages().routes.firstWhere((r) => r.name == route);
+    page.binding?.dependencies();
+    Get.bottomSheet(
+      Container(
+        height: Get.height * 0.88,
+        decoration: BoxDecoration(
+          color: ColorConstants.scaffoldLight,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24.sp)),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          children: [
+            SizedBox(height: 10.sp),
+            Container(
+              height: 4,
+              width: 44,
+              decoration: BoxDecoration(
+                color: ColorConstants.border,
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+            SizedBox(height: 6.sp),
+            Expanded(child: page.page()),
+          ],
+        ),
+      ),
+      isScrollControlled: true,
+      settings: RouteSettings(name: route, arguments: arguments),
     );
   }
 

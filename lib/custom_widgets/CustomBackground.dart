@@ -9,6 +9,7 @@ import 'package:tejas_loan/utils/color_constants.dart';
 
 import '../controller/dashbroadController.dart';
 import '../routes/routes_names.dart';
+import '../utils/events.dart';
 import '../utils/image_constants.dart';
 import '../views/all_leads_page.dart';
 import '../views/loan_status_page.dart';
@@ -49,11 +50,17 @@ class CustomBackground extends StatelessWidget {
 
   DashbroadController controller = Get.put(DashbroadController());
 
-  /// Flow screens are often opened with offAll(), leaving nothing to pop.
-  /// Fall back to the dashboard so the header arrow is never a dead button.
+  /// Apply-flow screens are opened with offAll(), so there is nothing to pop
+  /// and a plain Get.back() does nothing. Walk the journey backwards instead,
+  /// and only fall back to the dashboard at the first step.
   void _goBack() {
     if (Get.key.currentState?.canPop() ?? false) {
       Get.back();
+      return;
+    }
+    final previous = Events.previousStepRoute(Get.currentRoute);
+    if (previous != null) {
+      Get.offAllNamed(previous);
     } else {
       Get.offAllNamed(RoutesName.DashbroadScreen);
     }
@@ -144,7 +151,18 @@ class CustomBackground extends StatelessWidget {
 
             // Flow screens are a linear apply journey — no bottom nav here.
             bottomNavigationBar: null,
-            body: doubleBackToCloseApp != false
+            // On an apply step, the hardware back button must walk the journey
+            // backwards like the header arrow does. Offering "press again to
+            // exit" mid-application is the wrong answer to a back press.
+            body: Events.previousStepRoute(Get.currentRoute) != null
+                ? PopScope(
+                    canPop: false,
+                    onPopInvokedWithResult: (didPop, _) {
+                      if (!didPop) _goBack();
+                    },
+                    child: widgetOptions.elementAt(controller.selectedIndex1.value),
+                  )
+                : doubleBackToCloseApp != false
                 ? DoubleBackToCloseApp(
                     snackBar: SnackBar(
                         elevation: 10,

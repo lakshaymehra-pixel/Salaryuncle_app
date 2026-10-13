@@ -33,6 +33,15 @@ class CustomDrawer extends StatelessWidget {
 
   CustomDrawer({super.key, required this.advancedDrawerController});
 
+  /// "+91 98765 43210", or whatever is stored if it is not 10 digits.
+  /// The previous version called substring(0, 5) unguarded, which threw for
+  /// any shorter value.
+  String _formattedMobile() {
+    final n = prefs.getString(SharedConstants.MOBILE) ?? '';
+    if (n.length < 10) return n.isEmpty ? '' : '+91 $n';
+    return '+91 ${n.substring(0, 5)} ${n.substring(5, 10)}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -42,43 +51,44 @@ class CustomDrawer extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 15.sp),
             decoration: const BoxDecoration(gradient: ColorConstants.brandGradient),
             child: Padding(
-              padding: EdgeInsets.only(top: 25.sp),
+              padding: EdgeInsets.only(top: 12.sp),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const CustomProfilePicView(),
-                  SizedBox(height: 12.sp),
-                  Padding(
-                    padding: EdgeInsets.only(left: 18.sp),
-                    child: Column(
-                      children: [
-                        Flexible(
-                          child: SizedBox(
-                            width: 120,
-                            child: Text(
-                              textAlign: TextAlign.start,
-                              (prefs.getString(SharedConstants.NAME) ?? 'hi user')
-                                  .split(' ')
-                                  .map((word) => word.capitalize!)
-                                  .join(' '),
-                              style: TextStyle(color: Colors.white, fontSize: 18.sp, fontWeight: FontWeight.bold),
-                            ),
+                  SizedBox(width: 12.sp),
+                  // Take the rest of the row instead of a fixed 120px box:
+                  // a full name at this size does not fit 120px and was being
+                  // wrapped and clipped mid-word.
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 14.sp, right: 8.sp),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            (prefs.getString(SharedConstants.NAME) ?? 'hi user')
+                                .split(' ')
+                                .map((word) => word.capitalize!)
+                                .join(' '),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: Colors.white, fontSize: 16.sp, fontWeight: FontWeight.bold),
                           ),
-                        ),
-                        SizedBox(height: 11.sp),
-                        SizedBox(
-                          width: 120,
-                          child: Text(
-                            textAlign: TextAlign.start,
-                            '+91 ${(prefs.getString(SharedConstants.MOBILE) ?? '').substring(0, 5)} ${(prefs.getString(SharedConstants.MOBILE) ?? '').substring(5, 10)}',
+                          SizedBox(height: 6.sp),
+                          Text(
+                            _formattedMobile(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              fontSize: 16.sp,
-                              color: Colors.white,
+                              fontSize: 13.sp,
+                              color: Colors.white.withOpacity(0.85),
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   )
                 ],

@@ -146,8 +146,11 @@ class DashbroadController extends GetxController {
 
   onItemTapped(int index) {
     HapticFeedback.mediumImpact();
+    // selectedIndex drives the dashboard tabs; selectedIndex1 drives a
+    // different list inside CustomBackground, where the same number means a
+    // different screen (3 is Profile here, Support there). Only the dashboard
+    // tabs are being chosen, so leave the other list alone.
     selectedIndex.value = index;
-    selectedIndex1.value = index;
     if (index == 0) {
       selectedDrawerIndex.value = index;
     } else if (index != 2) {
